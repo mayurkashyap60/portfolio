@@ -1,0 +1,446 @@
+@import "variables";
+@import "mixin";
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+::-moz-selection {
+  /* Code for Firefox */
+  background: $primary;
+  color: $black;
+}
+
+::selection {
+  background: $primary;
+  color: $black;
+}
+// .nocursor {
+//   cursor: none;
+// }
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: $black;
+  font-family: $Manrope-Regular;
+  cursor: none;
+}
+
+.cursor_outline {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  border: 2px solid $primary;
+  position: fixed;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  /*transform: translate(calc(-50% + 15px), -50%);*/
+  transition: 0.4s ease-out;
+  margin: -10px;
+  &--hover {
+    opacity: 0;
+  }
+}
+.cursor2 {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  margin-left: -20px;
+  margin-top: -20px;
+  border-radius: 50%;
+  transition: transform 0.5s ease;
+  transform-origin: center center;
+  pointer-events: none;
+  z-index: 1000;
+  // border: 10px groove $primary;
+  background: $primary;
+  // background-image: $home_bg;
+}
+
+.grow-small {
+  transform: scale(8);
+  background: white;
+  mix-blend-mode: difference;
+  border: none;
+}
+
+.main {
+  position: relative;
+  // hero banner css code
+  .hero_banner {
+    position: relative;
+    max-width: 1920px;
+    margin: auto;
+    overflow: auto;
+    overflow-x: hidden;
+    height: 100vh;
+    @include flexboxA(space-between, center, column);
+    padding: 0rem 4rem 2.5rem 4rem;
+    flex-wrap: nowrap;
+    .header {
+      position: relative;
+      width: 100%;
+      @include flexboxA(space-between, flex-start, row);
+      .logo {
+        position: relative;
+        width: 50%;
+      }
+      .element {
+        position: relative;
+        width: 50%;
+      }
+    }
+    .content {
+      position: relative;
+      width: 100%;
+      @include flexboxA(space-between, flex-start, column);
+      .name {
+        font-family: $SpaceGrotesk-Light;
+        font-size: clamp(1.25rem, 1.5vw, 3rem);
+        line-height: normal;
+        margin-bottom: 1rem;
+        .namaste {
+          font-family: $SpaceGrotesk-Bold;
+        }
+      }
+      .heading {
+        font-family: $Manrope-SemiBold;
+        font-size: clamp(2.5rem, 6.5vw, 10rem);
+        width: 50%;
+        line-height: normal;
+        margin-bottom: 1rem;
+      }
+      .tagline {
+        width: 50%;
+        font-family: $SpaceGrotesk-Light;
+        font-size: clamp(1.25rem, 1.5vw, 3rem);
+      }
+    }
+  }
+  // hero banner css code
+  // about section css code
+  .about {
+    position: relative;
+    max-width: 1920px;
+    margin: auto;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 0rem 4rem 2.5rem 4rem;
+    .about_container_wrapper {
+      position: relative;
+      background-color: $support;
+      padding: 2.5rem 2.5rem;
+      border-radius: 8px;
+      .content {
+        position: relative;
+        .label {
+          background-color: $white;
+          color: $black;
+          font-size: 0.75rem;
+          line-height: normal;
+          margin-bottom: 1rem;
+          border-radius: 24px;
+          padding: 8px 16px;
+          display: block;
+          width: fit-content;
+        }
+        .text {
+          color: $white;
+          font-size: clamp(1.5rem, 2vw, 3rem);
+          line-height: 3rem;
+          margin-bottom: 1rem;
+          font-family: $SpaceGrotesk-Light;
+          width: 100%;
+          max-width: 760px;
+        }
+        .connect {
+          position: relative;
+          display: block;
+          margin: 2rem 0rem 4rem;
+          width: fit-content;
+          color: $white;
+          font-size: clamp(1.5rem, 2vw, 3rem);
+          font-family: $SpaceGrotesk-Light;
+          text-decoration: underline;
+          cursor: none;
+        }
+      }
+      .skill_boxes {
+        position: relative;
+        width: 100%;
+        @include flexboxB(space-between, flex-start, row);
+        margin-top: 2rem;
+        .box {
+          position: relative;
+          border: 1px solid $white;
+          width: 100%;
+          padding: 1.5rem 1.5rem;
+          min-height: 85vh;
+          .heading {
+            font-family: $Manrope-SemiBold;
+            font-size: clamp(2.5rem, 5.5vw, 10rem);
+            line-height: normal;
+            margin-bottom: 1rem;
+            color: $white;
+            overflow-wrap: anywhere;
+          }
+          .text {
+            color: $white;
+            font-size: clamp(1.5rem, 2vw, 3rem);
+            line-height: 3rem;
+            margin-bottom: 1rem;
+            font-family: $SpaceGrotesk-Light;
+          }
+        }
+      }
+      .brands {
+        position: relative;
+        padding-top: 4rem;
+        .heading {
+          color: $white;
+          font-size: clamp(1.5rem, 2vw, 3rem);
+          line-height: 3rem;
+          margin-bottom: 1rem;
+          font-family: $SpaceGrotesk-Light;
+          margin-bottom: 1rem;
+        }
+        .slider {
+          box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+          height: 100px;
+          margin: auto;
+          overflow: hidden;
+          position: relative;
+          margin-top: 2rem;
+          .slide_track {
+            animation: scrollRTL 40s linear infinite;
+            display: flex;
+            width: calc(250px * 14);
+          }
+          .slide_track_2 {
+            animation: scrollLTR 40s linear infinite;
+            display: flex;
+            width: calc(250px * 14);
+          }
+          .slide {
+            height: 100px;
+            width: 250px;
+            margin: 8px;
+          }
+        }
+      }
+    }
+  }
+  // about section css code
+  // projects section css code
+  .projects {
+    max-width: 1920px;
+    width: 100%;
+    margin: auto;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 6rem 4rem 4rem 4rem;
+    .heading {
+      color: $black;
+      font-size: clamp(1.5rem, 2vw, 3rem);
+      font-family: $SpaceGrotesk-SemiBold;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .subheading {
+      color: $black;
+      font-size: clamp(2.5rem, 6vw, 10rem);
+      line-height: normal;
+      font-family: $SpaceGrotesk-SemiBold;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    // .label {
+    //   color: $black;
+    //   font-size: clamp(1.5rem, 2vw, 3rem);
+    //   line-height: 3rem;
+    //   margin-bottom: 1rem;
+    //   font-family: $SpaceGrotesk-Light;
+    //   margin-bottom: 1rem;
+    //   display: block;
+    //   text-align: center;
+    // }
+    .cursor {
+      position: absolute;
+      width: 500px;
+      height: 275px;
+      top: 75%;
+      left: 50%;
+      margin: -8rem 0 0 -8rem;
+      z-index: 1;
+      border-radius: 8px;
+    }
+    .wrapper {
+      width: 100%;
+      margin: 4rem auto 4rem auto;
+      height: 100%;
+      .project {
+        border-bottom: 1px solid $secondary;
+        padding: 4rem;
+        mix-blend-mode: difference;
+        flex-basis: 1;
+        position: relative;
+        z-index: 2;
+        color: $white;
+        @include flexboxB(space-between, center, row);
+      }
+
+      .project-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        // cursor: pointer;
+      }
+    }
+  }
+  // projects section css code
+  // connect section css code
+  .contact {
+    position: relative;
+    max-width: 1920px;
+    width: 100%;
+    margin: auto;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 2.5rem 4rem 2.5rem 4rem;
+    .contact_wrapper {
+      position: relative;
+      .subheading {
+        color: $black;
+        font-size: clamp(1.5rem, 2vw, 3rem);
+        line-height: 3rem;
+        margin-bottom: 1rem;
+        font-family: $SpaceGrotesk-SemiBold;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      .marquee {
+        width: 100%;
+        overflow: hidden;
+        .marquee_wrapper {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 2rem;
+          list-style: none;
+          .heading {
+            font-family: $Manrope-SemiBold;
+            font-size: clamp(2.5rem, 6vw, 10rem);
+            line-height: normal;
+            margin-bottom: 1rem;
+            color: $black;
+            text-wrap: nowrap;
+            padding: 0 0.5rem;
+          }
+        }
+      }
+      .text_wrapper {
+        width: 70%;
+        text-align: center;
+        margin: auto;
+        padding: 2rem 0rem;
+        .text {
+          font-size: clamp(1.25rem, 2.25vw, 2.5rem);
+        }
+      }
+      ._cta {
+        width: 195px;
+        height: 195px;
+        margin: auto;
+        background-color: $black;
+        color: $white;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        text-align: center;
+        font-size: clamp(1rem, 2vw, 3rem);
+        text-decoration: none;
+        line-height: 38px;
+        font-family: $SpaceGrotesk-Light;
+        cursor: none;
+        // &:hover {
+        //   transition: 0.5s all;
+        //   background-color: $primary;
+        // }
+      }
+    }
+  }
+  // connect section css code
+}
+footer {
+  position: relative;
+  .footer_container_wrapper {
+    position: relative;
+    max-width: 1920px;
+    margin: auto;
+    overflow: auto;
+    overflow-x: hidden;
+    padding: 3.5rem 4rem 1rem 4rem;
+    @include flexboxA(space-between, flex-start, row);
+    .social {
+      position: relative;
+      @include flexboxA(flex-start, flex-start, row);
+      list-style: none;
+      margin: 0;
+      gap: 32px;
+      .platform {
+        // font-size: clamp(2.5rem, 6vw, 10rem);
+        display: block;
+        transition: 0.7s ease-in-out;
+        cursor: none;
+        &:hover {
+          transform: translateY(-8px);
+        }
+      }
+    }
+    .rights {
+      position: relative;
+      text-align: center;
+      .text {
+        font-size: 16px;
+        color: $black;
+      }
+    }
+  }
+}
+
+@keyframes scrollRTL {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 7));
+  }
+}
+
+@keyframes scrollLTR {
+  0% {
+    transform: translateX(calc(-250px * 7));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

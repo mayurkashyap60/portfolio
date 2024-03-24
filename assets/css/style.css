@@ -1,0 +1,494 @@
+@font-face {
+  font-family: "Manrope-Bold";
+  src: url("../fonts/Manrope/Manrope-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-ExtraBold";
+  src: url("../fonts/Manrope/Manrope-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-ExtraLight";
+  src: url("../fonts/Manrope/Manrope-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-Light";
+  src: url("../fonts/Manrope/Manrope-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-Medium";
+  src: url("../fonts/Manrope/Manrope-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-Regular";
+  src: url("../fonts/Manrope/Manrope-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-SemiBold";
+  src: url("../fonts/Manrope/Manrope-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SpaceGrotesk-Bold";
+  src: url("../fonts/Space_Grotesk/SpaceGrotesk-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SpaceGrotesk-Light";
+  src: url("../fonts/Space_Grotesk/SpaceGrotesk-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SpaceGrotesk-Medium";
+  src: url("../fonts/Space_Grotesk/SpaceGrotesk-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SpaceGrotesk-Regular";
+  src: url("../fonts/Space_Grotesk/SpaceGrotesk-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SpaceGrotesk-SemiBold";
+  src: url("../fonts/Space_Grotesk/SpaceGrotesk-SemiBold.ttf") format("truetype");
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-moz-selection {
+  /* Code for Firefox */
+  background: #97c30a;
+  color: #000;
+}
+
+::selection {
+  background: #97c30a;
+  color: #000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #000;
+  font-family: "Manrope-Regular";
+  cursor: none;
+}
+
+.cursor_outline {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  border: 2px solid #97c30a;
+  position: fixed;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  /*transform: translate(calc(-50% + 15px), -50%);*/
+  transition: 0.4s ease-out;
+  margin: -10px;
+}
+.cursor_outline--hover {
+  opacity: 0;
+}
+
+.cursor2 {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  margin-left: -20px;
+  margin-top: -20px;
+  border-radius: 50%;
+  transition: transform 0.5s ease;
+  transform-origin: center center;
+  pointer-events: none;
+  z-index: 1000;
+  background: #97c30a;
+}
+
+.grow-small {
+  transform: scale(8);
+  background: white;
+  mix-blend-mode: difference;
+  border: none;
+}
+
+.main {
+  position: relative;
+}
+.main .hero_banner {
+  position: relative;
+  max-width: 1920px;
+  margin: auto;
+  overflow: auto;
+  overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 0rem 4rem 2.5rem 4rem;
+  flex-wrap: nowrap;
+}
+.main .hero_banner .header {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.main .hero_banner .header .logo {
+  position: relative;
+  width: 50%;
+}
+.main .hero_banner .header .element {
+  position: relative;
+  width: 50%;
+}
+.main .hero_banner .content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.main .hero_banner .content .name {
+  font-family: "SpaceGrotesk-Light";
+  font-size: clamp(1.25rem, 1.5vw, 3rem);
+  line-height: normal;
+  margin-bottom: 1rem;
+}
+.main .hero_banner .content .name .namaste {
+  font-family: "SpaceGrotesk-Bold";
+}
+.main .hero_banner .content .heading {
+  font-family: "Manrope-SemiBold";
+  font-size: clamp(2.5rem, 6.5vw, 10rem);
+  width: 50%;
+  line-height: normal;
+  margin-bottom: 1rem;
+}
+.main .hero_banner .content .tagline {
+  width: 50%;
+  font-family: "SpaceGrotesk-Light";
+  font-size: clamp(1.25rem, 1.5vw, 3rem);
+}
+.main .about {
+  position: relative;
+  max-width: 1920px;
+  margin: auto;
+  overflow: auto;
+  overflow-x: hidden;
+  padding: 0rem 4rem 2.5rem 4rem;
+}
+.main .about .about_container_wrapper {
+  position: relative;
+  background-color: #141414;
+  padding: 2.5rem 2.5rem;
+  border-radius: 8px;
+}
+.main .about .about_container_wrapper .content {
+  position: relative;
+}
+.main .about .about_container_wrapper .content .label {
+  background-color: #fff;
+  color: #000;
+  font-size: 0.75rem;
+  line-height: normal;
+  margin-bottom: 1rem;
+  border-radius: 24px;
+  padding: 8px 16px;
+  display: block;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.main .about .about_container_wrapper .content .text {
+  color: #fff;
+  font-size: clamp(1.5rem, 2vw, 3rem);
+  line-height: 3rem;
+  margin-bottom: 1rem;
+  font-family: "SpaceGrotesk-Light";
+  width: 100%;
+  max-width: 760px;
+}
+.main .about .about_container_wrapper .content .connect {
+  position: relative;
+  display: block;
+  margin: 2rem 0rem 4rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: #fff;
+  font-size: clamp(1.5rem, 2vw, 3rem);
+  font-family: "SpaceGrotesk-Light";
+  text-decoration: underline;
+  cursor: none;
+}
+.main .about .about_container_wrapper .skill_boxes {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  margin-top: 2rem;
+}
+.main .about .about_container_wrapper .skill_boxes .box {
+  position: relative;
+  border: 1px solid #fff;
+  width: 100%;
+  padding: 1.5rem 1.5rem;
+  min-height: 85vh;
+}
+.main .about .about_container_wrapper .skill_boxes .box .heading {
+  font-family: "Manrope-SemiBold";
+  font-size: clamp(2.5rem, 5.5vw, 10rem);
+  line-height: normal;
+  margin-bottom: 1rem;
+  color: #fff;
+  overflow-wrap: anywhere;
+}
+.main .about .about_container_wrapper .skill_boxes .box .text {
+  color: #fff;
+  font-size: clamp(1.5rem, 2vw, 3rem);
+  line-height: 3rem;
+  margin-bottom: 1rem;
+  font-family: "SpaceGrotesk-Light";
+}
+.main .about .about_container_wrapper .brands {
+  position: relative;
+  padding-top: 4rem;
+}
+.main .about .about_container_wrapper .brands .heading {
+  color: #fff;
+  font-size: clamp(1.5rem, 2vw, 3rem);
+  line-height: 3rem;
+  margin-bottom: 1rem;
+  font-family: "SpaceGrotesk-Light";
+  margin-bottom: 1rem;
+}
+.main .about .about_container_wrapper .brands .slider {
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+  height: 100px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  margin-top: 2rem;
+}
+.main .about .about_container_wrapper .brands .slider .slide_track {
+  animation: scrollRTL 40s linear infinite;
+  display: flex;
+  width: 3500px;
+}
+.main .about .about_container_wrapper .brands .slider .slide_track_2 {
+  animation: scrollLTR 40s linear infinite;
+  display: flex;
+  width: 3500px;
+}
+.main .about .about_container_wrapper .brands .slider .slide {
+  height: 100px;
+  width: 250px;
+  margin: 8px;
+}
+.main .projects {
+  max-width: 1920px;
+  width: 100%;
+  margin: auto;
+  overflow: auto;
+  overflow-x: hidden;
+  padding: 6rem 4rem 4rem 4rem;
+}
+.main .projects .heading {
+  color: #000;
+  font-size: clamp(1.5rem, 2vw, 3rem);
+  font-family: "SpaceGrotesk-SemiBold";
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.main .projects .subheading {
+  color: #000;
+  font-size: clamp(2.5rem, 6vw, 10rem);
+  line-height: normal;
+  font-family: "SpaceGrotesk-SemiBold";
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.main .projects .cursor {
+  position: absolute;
+  width: 500px;
+  height: 275px;
+  top: 75%;
+  left: 50%;
+  margin: -8rem 0 0 -8rem;
+  z-index: 1;
+  border-radius: 8px;
+}
+.main .projects .wrapper {
+  width: 100%;
+  margin: 4rem auto 4rem auto;
+  height: 100%;
+}
+.main .projects .wrapper .project {
+  border-bottom: 1px solid #343a40;
+  padding: 4rem;
+  mix-blend-mode: difference;
+  flex-basis: 1;
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+.main .projects .wrapper .project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.main .contact {
+  position: relative;
+  max-width: 1920px;
+  width: 100%;
+  margin: auto;
+  overflow: auto;
+  overflow-x: hidden;
+  padding: 2.5rem 4rem 2.5rem 4rem;
+}
+.main .contact .contact_wrapper {
+  position: relative;
+}
+.main .contact .contact_wrapper .subheading {
+  color: #000;
+  font-size: clamp(1.5rem, 2vw, 3rem);
+  line-height: 3rem;
+  margin-bottom: 1rem;
+  font-family: "SpaceGrotesk-SemiBold";
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.main .contact .contact_wrapper .marquee {
+  width: 100%;
+  overflow: hidden;
+}
+.main .contact .contact_wrapper .marquee .marquee_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  list-style: none;
+}
+.main .contact .contact_wrapper .marquee .marquee_wrapper .heading {
+  font-family: "Manrope-SemiBold";
+  font-size: clamp(2.5rem, 6vw, 10rem);
+  line-height: normal;
+  margin-bottom: 1rem;
+  color: #000;
+  text-wrap: nowrap;
+  padding: 0 0.5rem;
+}
+.main .contact .contact_wrapper .text_wrapper {
+  width: 70%;
+  text-align: center;
+  margin: auto;
+  padding: 2rem 0rem;
+}
+.main .contact .contact_wrapper .text_wrapper .text {
+  font-size: clamp(1.25rem, 2.25vw, 2.5rem);
+}
+.main .contact .contact_wrapper ._cta {
+  width: 195px;
+  height: 195px;
+  margin: auto;
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 3rem);
+  text-decoration: none;
+  line-height: 38px;
+  font-family: "SpaceGrotesk-Light";
+  cursor: none;
+}
+
+footer {
+  position: relative;
+}
+footer .footer_container_wrapper {
+  position: relative;
+  max-width: 1920px;
+  margin: auto;
+  overflow: auto;
+  overflow-x: hidden;
+  padding: 3.5rem 4rem 1rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+footer .footer_container_wrapper .social {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  list-style: none;
+  margin: 0;
+  gap: 32px;
+}
+footer .footer_container_wrapper .social .platform {
+  display: block;
+  transition: 0.7s ease-in-out;
+  cursor: none;
+}
+footer .footer_container_wrapper .social .platform:hover {
+  transform: translateY(-8px);
+}
+footer .footer_container_wrapper .rights {
+  position: relative;
+  text-align: center;
+}
+footer .footer_container_wrapper .rights .text {
+  font-size: 16px;
+  color: #000;
+}
+
+@keyframes scrollRTL {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-1750px);
+  }
+}
+@keyframes scrollLTR {
+  0% {
+    transform: translateX(-1750px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}/*# sourceMappingURL=style.css.map */
