@@ -323,7 +323,7 @@ body {
     margin: auto;
     overflow: auto;
     overflow-x: hidden;
-    padding: 2.5rem 4rem 2.5rem 4rem;
+    padding: 2.5rem 4rem 4.5rem 4rem;
     .contact_wrapper {
       position: relative;
       .subheading {
@@ -381,10 +381,10 @@ body {
         line-height: 38px;
         font-family: $SpaceGrotesk-Light;
         cursor: none;
-        // &:hover {
-        //   transition: 0.5s all;
-        //   background-color: $primary;
-        // }
+        &:hover {
+          transition: 0.5s background-color, 0.5s box-shadow;
+          box-shadow: 3px 10px 20px 4px #00000040;
+        }
       }
     }
   }

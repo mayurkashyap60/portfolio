@@ -119,49 +119,36 @@ $(document).ready(function () {
     // marquee animation 
 
     // magnetic button  
-    function magneticButton() {
-        let color = '#97c30a';
-        let color2 = '#000';
-        const button = document.querySelector('._cta');
-        let boundingRect = button.getBoundingClientRect();
-        window.addEventListener('resize', () => {
-            boundingRect = button.getBoundingClientRect();
-        });
-        button.addEventListener('mousemove', (e) => {
-            // alert(this)
-            // document.getElementById('_cta').style.backgroundColor = "red";
-            const mousePosX = e.x - boundingRect.left;
-            const mousePosY = e.y - boundingRect.top;
-            gsap.to(button, {
-                x: (mousePosX - boundingRect.width / 2) * 0.4,
-                y: (mousePosY - boundingRect.height / 2) * 0.4,
-                duration: 0.7,
-                ease: 'power3.out',
-                backgroundColor: color,
-            });
-            document.getElementById('cursor_outline').classList.add('d-none')
+    var magnets = document.querySelectorAll('.magnetic')
+    var strength = 90
+    const mgButton = document.querySelector('._cta');
+    let color1 = '#97c30a';
+    let color2 = '#000';
 
+    magnets.forEach((magnet) => {
+        magnet.addEventListener('mousemove', moveMagnet);
+        magnet.addEventListener('mouseout', function (event) {
+            document.getElementById('_cta').style.backgroundColor = color2;
+            TweenMax.to(event.currentTarget, 1, { x: 0, y: 0, ease: Power4.easeOut })
         });
-        button.addEventListener('mouseleave', () => {
-
-            gsap.to(button, {
-                x: 0,
-                y: 0,
-                duration: 0.7,
-                ease: 'elastic.out(1,0.3)',
-                backgroundColor: color2
-            });
-            document.getElementById('cursor_outline').classList.remove('d-none')
-        });
-    }
-    var contactTop = $('section#contact').offset().top;
-    $(window).scroll(function () {
-        var scrollWindowTop = $(window).scrollTop() + 60;
-        if (scrollWindowTop >= contactTop) {
-            magneticButton()
-            console.log('DDDD');
-        }
     });
+
+    function moveMagnet(event) {
+        document.getElementById('_cta').style.backgroundColor = color1;
+        var magnetButton = event.currentTarget
+        var bounding = magnetButton.getBoundingClientRect()
+
+
+        //console.log(magnetButton, bounding)
+
+        TweenMax.to(magnetButton, 1, {
+            x: (((event.clientX - bounding.left) / magnetButton.offsetWidth) - 0.5) * strength,
+            y: (((event.clientY - bounding.top) / magnetButton.offsetHeight) - 0.5) * strength,
+            ease: Power4.easeOut
+        })
+
+        //magnetButton.style.transform = 'translate(' + (((( event.clientX - bounding.left)/(magnetButton.offsetWidth))) - 0.5) * strength + 'px,'+ (((( event.clientY - bounding.top)/(magnetButton.offsetHeight))) - 0.5) * strength + 'px)';
+    }
     // magnetic button
 
     //custom cursor
