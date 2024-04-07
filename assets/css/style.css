@@ -102,10 +102,10 @@ body {
 
 .cursor2 {
   position: fixed;
-  width: 20px;
-  height: 20px;
-  margin-left: -20px;
-  margin-top: -20px;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  margin-top: -4px;
   border-radius: 50%;
   transition: transform 0.5s ease;
   transform-origin: center center;
@@ -147,16 +147,26 @@ body {
   align-items: flex-start;
   flex-wrap: wrap;
   flex-direction: row;
+  padding: 2rem 0rem 1rem;
 }
 .main .hero_banner .header .logo {
   position: relative;
-  width: 50%;
+  width: 124px;
 }
 .main .hero_banner .header .element {
   position: relative;
   width: 50%;
 }
-.main .hero_banner .content {
+.main .hero_banner .hero_wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.main .hero_banner .hero_wrapper .content {
   position: relative;
   width: 100%;
   display: flex;
@@ -165,26 +175,39 @@ body {
   flex-wrap: wrap;
   flex-direction: column;
 }
-.main .hero_banner .content .name {
+.main .hero_banner .hero_wrapper .content .name {
   font-family: "SpaceGrotesk-Light";
   font-size: clamp(1.25rem, 1.5vw, 3rem);
   line-height: normal;
   margin-bottom: 1rem;
 }
-.main .hero_banner .content .name .namaste {
+.main .hero_banner .hero_wrapper .content .name .namaste {
   font-family: "SpaceGrotesk-Bold";
 }
-.main .hero_banner .content .heading {
+.main .hero_banner .hero_wrapper .content .heading {
   font-family: "Manrope-SemiBold";
   font-size: clamp(2.5rem, 6.5vw, 10rem);
   width: 50%;
   line-height: normal;
   margin-bottom: 1rem;
 }
-.main .hero_banner .content .tagline {
+.main .hero_banner .hero_wrapper .content .tagline {
   width: 50%;
   font-family: "SpaceGrotesk-Light";
   font-size: clamp(1.25rem, 1.5vw, 3rem);
+}
+.main .hero_banner .hero_wrapper .hero_img {
+  position: absolute;
+  width: 50%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-right: 0;
+  bottom: 0;
+  text-align: right;
+}
+.main .hero_banner .hero_wrapper .hero_img .displacement {
+  filter: url(#displacementFilter);
 }
 .main .about {
   position: relative;
@@ -192,7 +215,7 @@ body {
   margin: auto;
   overflow: auto;
   overflow-x: hidden;
-  padding: 0rem 4rem 2.5rem 4rem;
+  padding: 4rem 4rem 2.5rem 4rem;
 }
 .main .about .about_container_wrapper {
   position: relative;
@@ -222,7 +245,8 @@ body {
   margin-bottom: 1rem;
   font-family: "SpaceGrotesk-Light";
   width: 100%;
-  max-width: 760px;
+  max-width: 990px;
+  padding: 1rem 0 0;
 }
 .main .about .about_container_wrapper .content .connect {
   position: relative;
@@ -251,7 +275,7 @@ body {
   border: 1px solid #fff;
   width: 100%;
   padding: 1.5rem 1.5rem;
-  min-height: 85vh;
+  height: 85vh;
 }
 .main .about .about_container_wrapper .skill_boxes .box .heading {
   font-family: "Manrope-SemiBold";
@@ -291,12 +315,12 @@ body {
 .main .about .about_container_wrapper .brands .slider .slide_track {
   animation: scrollRTL 40s linear infinite;
   display: flex;
-  width: 3500px;
+  width: 10000px;
 }
 .main .about .about_container_wrapper .brands .slider .slide_track_2 {
   animation: scrollLTR 40s linear infinite;
   display: flex;
-  width: 3500px;
+  width: 10000px;
 }
 .main .about .about_container_wrapper .brands .slider .slide {
   height: 100px;
@@ -310,6 +334,7 @@ body {
   overflow: auto;
   overflow-x: hidden;
   padding: 6rem 4rem 4rem 4rem;
+  display: none;
 }
 .main .projects .heading {
   color: #000;
@@ -326,42 +351,9 @@ body {
   margin-bottom: 1rem;
   text-align: center;
 }
-.main .projects .cursor {
-  position: absolute;
-  width: 500px;
-  height: 275px;
-  top: 75%;
-  left: 50%;
-  margin: -8rem 0 0 -8rem;
-  z-index: 1;
-  border-radius: 8px;
-}
 .main .projects .wrapper {
-  width: 100%;
-  margin: 4rem auto 4rem auto;
-  height: 100%;
-}
-.main .projects .wrapper .project {
-  border-bottom: 1px solid #343a40;
-  padding: 4rem;
-  mix-blend-mode: difference;
-  flex-basis: 1;
   position: relative;
-  z-index: 2;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap;
-  flex-direction: row;
-}
-.main .projects .wrapper .project-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  z-index: 1;
 }
 .main .contact {
   position: relative;
@@ -430,9 +422,9 @@ body {
   line-height: 38px;
   font-family: "SpaceGrotesk-Light";
   cursor: none;
+  transition: 0.8s background-color, 0.8s box-shadow;
 }
 .main .contact .contact_wrapper ._cta:hover {
-  transition: 0.5s background-color, 0.5s box-shadow;
   box-shadow: 3px 10px 20px 4px rgba(0, 0, 0, 0.2509803922);
 }
 
@@ -448,7 +440,7 @@ footer .footer_container_wrapper {
   padding: 3.5rem 4rem 1rem 4rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   flex-direction: row;
 }
@@ -467,6 +459,7 @@ footer .footer_container_wrapper .social .platform {
   display: block;
   transition: 0.7s ease-in-out;
   cursor: none;
+  padding: 8px;
 }
 footer .footer_container_wrapper .social .platform:hover {
   transform: translateY(-8px);

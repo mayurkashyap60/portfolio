@@ -57,10 +57,10 @@ body {
 }
 .cursor2 {
   position: fixed;
-  width: 20px;
-  height: 20px;
-  margin-left: -20px;
-  margin-top: -20px;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  margin-top: -4px;
   border-radius: 50%;
   transition: transform 0.5s ease;
   transform-origin: center center;
@@ -95,39 +95,58 @@ body {
       position: relative;
       width: 100%;
       @include flexboxA(space-between, flex-start, row);
+      padding: 2rem 0rem 1rem;
       .logo {
         position: relative;
-        width: 50%;
+        width: 124px;
       }
       .element {
         position: relative;
         width: 50%;
       }
     }
-    .content {
+    .hero_wrapper {
       position: relative;
       width: 100%;
-      @include flexboxA(space-between, flex-start, column);
-      .name {
-        font-family: $SpaceGrotesk-Light;
-        font-size: clamp(1.25rem, 1.5vw, 3rem);
-        line-height: normal;
-        margin-bottom: 1rem;
-        .namaste {
-          font-family: $SpaceGrotesk-Bold;
+      @include flexboxA(space-between, flex-end, row);
+      .content {
+        position: relative;
+        width: 100%;
+        @include flexboxA(space-between, flex-start, column);
+        .name {
+          font-family: $SpaceGrotesk-Light;
+          font-size: clamp(1.25rem, 1.5vw, 3rem);
+          line-height: normal;
+          margin-bottom: 1rem;
+          .namaste {
+            font-family: $SpaceGrotesk-Bold;
+          }
+        }
+        .heading {
+          font-family: $Manrope-SemiBold;
+          font-size: clamp(2.5rem, 6.5vw, 10rem);
+          width: 50%;
+          line-height: normal;
+          margin-bottom: 1rem;
+        }
+        .tagline {
+          width: 50%;
+          font-family: $SpaceGrotesk-Light;
+          font-size: clamp(1.25rem, 1.5vw, 3rem);
         }
       }
-      .heading {
-        font-family: $Manrope-SemiBold;
-        font-size: clamp(2.5rem, 6.5vw, 10rem);
+      .hero_img {
+        position: absolute;
         width: 50%;
-        line-height: normal;
-        margin-bottom: 1rem;
-      }
-      .tagline {
-        width: 50%;
-        font-family: $SpaceGrotesk-Light;
-        font-size: clamp(1.25rem, 1.5vw, 3rem);
+        left: 0;
+        right: 0;
+        margin: auto;
+        margin-right: 0;
+        bottom: 0;
+        text-align: right;
+        .displacement {
+          filter: url(#displacementFilter);
+        }
       }
     }
   }
@@ -139,7 +158,7 @@ body {
     margin: auto;
     overflow: auto;
     overflow-x: hidden;
-    padding: 0rem 4rem 2.5rem 4rem;
+    padding: 4rem 4rem 2.5rem 4rem;
     .about_container_wrapper {
       position: relative;
       background-color: $support;
@@ -165,7 +184,8 @@ body {
           margin-bottom: 1rem;
           font-family: $SpaceGrotesk-Light;
           width: 100%;
-          max-width: 760px;
+          max-width: 990px;
+          padding: 1rem 0 0;
         }
         .connect {
           position: relative;
@@ -189,7 +209,7 @@ body {
           border: 1px solid $white;
           width: 100%;
           padding: 1.5rem 1.5rem;
-          min-height: 85vh;
+          height: 85vh;
           .heading {
             font-family: $Manrope-SemiBold;
             font-size: clamp(2.5rem, 5.5vw, 10rem);
@@ -228,12 +248,12 @@ body {
           .slide_track {
             animation: scrollRTL 40s linear infinite;
             display: flex;
-            width: calc(250px * 14);
+            width: calc(250px * 40);
           }
           .slide_track_2 {
             animation: scrollLTR 40s linear infinite;
             display: flex;
-            width: calc(250px * 14);
+            width: calc(250px * 40);
           }
           .slide {
             height: 100px;
@@ -253,6 +273,7 @@ body {
     overflow: auto;
     overflow-x: hidden;
     padding: 6rem 4rem 4rem 4rem;
+    display: none;
     .heading {
       color: $black;
       font-size: clamp(1.5rem, 2vw, 3rem);
@@ -268,50 +289,10 @@ body {
       margin-bottom: 1rem;
       text-align: center;
     }
-    // .label {
-    //   color: $black;
-    //   font-size: clamp(1.5rem, 2vw, 3rem);
-    //   line-height: 3rem;
-    //   margin-bottom: 1rem;
-    //   font-family: $SpaceGrotesk-Light;
-    //   margin-bottom: 1rem;
-    //   display: block;
-    //   text-align: center;
-    // }
-    .cursor {
-      position: absolute;
-      width: 500px;
-      height: 275px;
-      top: 75%;
-      left: 50%;
-      margin: -8rem 0 0 -8rem;
-      z-index: 1;
-      border-radius: 8px;
-    }
-    .wrapper {
-      width: 100%;
-      margin: 4rem auto 4rem auto;
-      height: 100%;
-      .project {
-        border-bottom: 1px solid $secondary;
-        padding: 4rem;
-        mix-blend-mode: difference;
-        flex-basis: 1;
-        position: relative;
-        z-index: 2;
-        color: $white;
-        @include flexboxB(space-between, center, row);
-      }
 
-      .project-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        // cursor: pointer;
-      }
+    .wrapper {
+      position: relative;
+      width: 100%;
     }
   }
   // projects section css code
@@ -381,8 +362,8 @@ body {
         line-height: 38px;
         font-family: $SpaceGrotesk-Light;
         cursor: none;
+        transition: 0.8s background-color, 0.8s box-shadow;
         &:hover {
-          transition: 0.5s background-color, 0.5s box-shadow;
           box-shadow: 3px 10px 20px 4px #00000040;
         }
       }
@@ -399,7 +380,7 @@ footer {
     overflow: auto;
     overflow-x: hidden;
     padding: 3.5rem 4rem 1rem 4rem;
-    @include flexboxA(space-between, flex-start, row);
+    @include flexboxA(space-between, center, row);
     .social {
       position: relative;
       @include flexboxA(flex-start, flex-start, row);
@@ -411,6 +392,7 @@ footer {
         display: block;
         transition: 0.7s ease-in-out;
         cursor: none;
+        padding: 8px;
         &:hover {
           transform: translateY(-8px);
         }

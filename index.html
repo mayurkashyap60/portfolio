@@ -9,30 +9,54 @@
     <title>Portfolio</title>
     <link rel="stylesheet" href="https://www.bajajcapital.com/assets/style/css/css2.css">
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/locomotive-scroll.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 
 </head>
 
 <body>
     <!-- custom cursor  -->
-    <div class="cursor_outline" id="cursor_outline"></div>
+    <!-- <div class="cursor_outline" id="cursor_outline"></div> -->
     <div class="cursor2"></div>
     <!-- custom cursor  -->
-    <main class="main">
+
+    <main class="main" data-scroll-container>
         <!-- hero banner section  -->
         <section class="hero_banner">
             <div class="header">
                 <div class="logo">
-
+                    <img src="./assets/images/logo.png" class="img-fluid" alt="logo">
                 </div>
                 <div class="element">
+                    <!-- <p class="connect">Connect</p> -->
                 </div>
             </div>
-            <div class="content">
-                <p class="name letter"><span class="namaste">नमस्ते</span>, My name is Mayur Kashyap</p>
-                <h1 class="heading letter">Digital & <span class="d-block">UI Designer</span></h1>
-                <p class="tagline letter">Translating ideas, user interface and brand values into eye-catching websites
-                    and branding for start-up's and scale-up's.</p>
+            <div class="hero_wrapper">
+                <div class="content">
+                    <p class="name letter"><span class="namaste">नमस्ते</span>, My name is Mayur Kashyap</p>
+                    <h1 class="heading letter">Digital & <span class="d-block">UI Designer</span></h1>
+                    <p class="tagline letter">Translating ideas, user interface and brand values into eye-catching
+                        websites
+                        and branding for start-up's and scale-up's.</p>
+                </div>
+                <div class="hero_img">
+                    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <defs>
+                            <filter id="displacementFilter">
+                                <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise" />
+                                <feDisplacementMap in="SourceGraphic" in2="noise" scale="50" xChannelSelector="R"
+                                    yChannelSelector="G" />
+                            </filter>
+                            <mask id="circleMask">
+                                <circle cx="300" cy="300" r="0" fill="white" class="displacement" />
+                            </mask>
+                        </defs>
+                        <image xlink:href="https://www.mayurkashyap.com/assets/images/hero_img.png" width="600"
+                            height="600" mask="url(#circleMask)" />
+                    </svg>
+
+                </div>
             </div>
         </section>
         <!-- hero banner section  -->
@@ -44,7 +68,7 @@
                     <span class="label">ABOUT ME</span>
                     <p class="text cursor-scale small">My goal is to create user-centered digital products designed
                         specifically for
-                        startups and scale-ups. With 8 years of solid experience, I currently serve as a Senior Designer
+                        startups and scale-ups. With 5 years of solid experience, I currently serve as a Senior Designer
                         at owow.io. Need a skilled freelancer for your next big project? Look no further.</p>
                     <a href="mailto:mayurkashyap60@gmail.com" class="connect">Let's connect</a>
                 </div>
@@ -73,180 +97,192 @@
                     <div class="slider">
                         <div class="slide_track">
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p1.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p2.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/3.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p3.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p4.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/5.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p5.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/6.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p6.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p7.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p8.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p9.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/3.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p10.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p1.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/5.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p2.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/6.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p3.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p4.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p5.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p6.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p7.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p8.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p9.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p10.png" height="100" width="250" alt="" />
                             </div>
                         </div>
                     </div>
                     <div class="slider">
                         <div class="slide_track_2">
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p11.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p12.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/3.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p13.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p14.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/5.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p15.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/6.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p16.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p17.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p18.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p19.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/3.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p20.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p11.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/5.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p12.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/6.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p13.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p14.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p15.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p16.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p17.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p18.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p19.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p20.png" height="100" width="250" alt="" />
                             </div>
                         </div>
                     </div>
                     <div class="slider">
                         <div class="slide_track">
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p21.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p22.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/3.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p23.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p24.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/5.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p25.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/6.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p26.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p27.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/1.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p28.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p29.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/3.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p30.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p21.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/5.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p22.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/6.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p23.png" height="100" width="250" alt="" />
                             </div>
                             <div class="slide">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png" height="100"
-                                    width="250" alt="" />
+                                <img src="./assets/images/brands/p24.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p25.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p26.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p27.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p28.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p29.png" height="100" width="250" alt="" />
+                            </div>
+                            <div class="slide">
+                                <img src="./assets/images/brands/p30.png" height="100" width="250" alt="" />
                             </div>
                         </div>
                     </div>
@@ -261,36 +297,7 @@
             <h3 class="heading">OK LESS TALKING, MORE SHOWING</h3>
             <h3 class="subheading">Selective Work</h3>
             <div class="wrapper">
-                <div class="project-list">
-                    <div class="project hover_img1">
-                        <div class="project-title">
-                            <h1>Motionland</h1>
-                        </div>
-                        <div class="project-categ">Web</div>
-                        <div class="project-overlay"></div>
-                    </div>
-                    <div class="project hover_img2">
-                        <div class="project-title">
-                            <h1>Focus Reactive</h1>
-                        </div>
-                        <div class="project-categ">Web</div>
-                        <div class="project-overlay"></div>
-                    </div>
-                    <div class="project hover_img3">
-                        <div class="project-title">
-                            <h1>Aspect</h1>
-                        </div>
-                        <div class="project-categ">Web</div>
-                        <div class="project-overlay"></div>
-                    </div>
-                    <div class="project hover_img4">
-                        <div class="project-title">
-                            <h1>Logo Mark</h1>
-                        </div>
-                        <div class="project-categ">Web</div>
-                        <div class="project-overlay"></div>
-                    </div>
-                </div>
+
             </div>
         </section>
         <!-- projects section  -->
@@ -310,39 +317,45 @@
                     <p class="text">You heard from me, now I'd love to hear from you! <span class="d-block">Smack that
                             button to
                             fill shoot an email
-                            on over to mayur@gmail.com</span></p>
+                            on over to mayurkashyap60@gmail.com</span></p>
                 </div>
-                <a href="mailto:mayur@gmail.com" class="_cta magnetic" id="_cta">LET'S CONNECT</a>
+                <a href="mailto:mayurkashyap60@gmail.com" class="_cta magnetic" id="_cta">LET'S CONNECT</a>
             </div>
         </section>
         <!-- connect section  -->
 
+        <!-- footer section  -->
+        <footer>
+            <div class="footer_container_wrapper">
+                <ul class="social">
+                    <li><a title="Github" href="https://github.com/mayurkashyap60" class="platform"><img
+                                src="./assets/images/icons/github.png" width="28" class="img-fluid" alt="github"></a>
+                    </li>
+                    <li><a title="Linkedin" href="https://www.linkedin.com/in/mayur-kashyap" class="platform"><img
+                                src="./assets/images/icons/linkedin.png" width="28" class="img-fluid"
+                                alt="linkedin"></a>
+                    </li>
+                    <li><a title="Email" href="mailto:mayurkashyap60@gmail.com" class="platform"><img
+                                src="./assets/images/icons/email.png" width="28" class="img-fluid" alt="email"></a></li>
+                </ul>
+                <div class="rights">
+                    <p class="text">
+                        <img src="./assets/images/logo.png" alt="logo" width="210">
+                    </p>
+                </div>
+                <div class="rights">
+                    <p class="text">
+                        &copy;&nbsp;2024 All rights reserved
+                    </p>
+                </div>
+            </div>
+        </footer>
+        <!-- footer section  -->
     </main>
-    <footer>
-        <div class="footer_container_wrapper">
-            <ul class="social">
-                <li><a title="Github" href="#" class="platform"><img src="./assets/images/icons/github.png" width="32"
-                            class="img-fluid" alt="github"></a></li>
-                <li><a title="Linkedin" href="#" class="platform"><img src="./assets/images/icons/linkedin.png"
-                            width="32" class="img-fluid" alt="linkedin"></a></li>
-                <li><a title="Email" href="#" class="platform"><img src="./assets/images/icons/email.png" width="32"
-                            class="img-fluid" alt="email"></a></li>
-            </ul>
-            <div class="rights">
-                <p class="text">
-                    &copy;&nbsp;2024 All rights reserved.
-                </p>
-            </div>
-            <div class="rights">
-                <p class="text">
-                    &copy;&nbsp;2024 All rights reserved
-                </p>
-            </div>
-        </div>
-    </footer>
     <script src="./assets/js/jquery-3.5.1.min.js"></script>
     <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js'></script>
+    <script src="./assets/js/locomotive-scroll.min.js"></script>
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js'></script> -->
     <!-- <script src="./assets/js/TweenMax.min.js"></script> -->
     <!-- <script src='./assets/js/ScrollTrigger.min.js'></script> -->
     <script src="./assets/js/app.js"></script>

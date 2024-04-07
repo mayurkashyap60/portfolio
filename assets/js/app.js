@@ -1,44 +1,31 @@
 $(document).ready(function () {
     console.log('working');
 
+    //page scroll animation 
+    const Locoscroll = new LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]"),
+        smooth: true,
+        smartphone: {
+            smooth: true
+        }
+    })
+    //page scroll animation 
+
     // text animation 
     gsap.from(".letter", { rotationX: 36, opacity: 0, duration: 1.8, yPercent: 100, stagger: 0.75, ease: "Expo.easeOut" })
+    gsap.fromTo('.displacement', {
+        r: 0,
+    }, {
+        r: 300,
+        // repeat: -1,
+        duration: 6,
+        ease: 'power3.inOut',
+        yoyo: false,
+    })
     // text animation 
 
     // projects section 
-    var $cursor = $(".cursor"),
-        $overlay = $(".project-overlay");
-    function moveCircle(e) {
-        TweenLite.to($cursor, 0.5, {
-            css: {
-                left: e.pageX,
-                top: e.pageY
-            },
-            delay: 0.03
-        });
-    }
-    $(".hover_img1").hover(function () {
-        $(".cursor").css({ "background-image": "url(https://i.pinimg.com/564x/85/24/d7/8524d785a8427617d475bf02d51710fc.jpg)" });
-    });
-    $(".hover_img2").hover(function () {
-        $(".cursor").css({ "background-image": "url(https://i.pinimg.com/564x/97/59/85/9759859a26a8f8195d1c4dd92f00cb73.jpg)" });
-    });
-    $(".hover_img3").hover(function () {
-        $(".cursor").css({ "background-image": "url(https://i.pinimg.com/564x/9c/52/81/9c528158c74da06541565671cfc2644b.jpg)" });
-    });
-    $(".hover_img4").hover(function () {
-        $(".cursor").css({ "background-image": "url(https://i.pinimg.com/564x/38/18/c3/3818c31969226e29a9dabd5e3cd0802a.jpg)" });
-    });
-    var flag = false;
-    $($overlay).mousemove(function () {
-        flag = true;
-        TweenLite.to($cursor, 0.3, { scale: 1, autoAlpha: 1 });
-        $($overlay).on("mousemove", moveCircle);
-    });
-    $($overlay).mouseout(function () {
-        flag = false;
-        TweenLite.to($cursor, 0.3, { scale: 0.1, autoAlpha: 0 });
-    });
+
     // projects section 
 
     // marquee animation 
@@ -124,7 +111,6 @@ $(document).ready(function () {
     const mgButton = document.querySelector('._cta');
     let color1 = '#97c30a';
     let color2 = '#000';
-
     magnets.forEach((magnet) => {
         magnet.addEventListener('mousemove', moveMagnet);
         magnet.addEventListener('mouseout', function (event) {
@@ -132,7 +118,6 @@ $(document).ready(function () {
             TweenMax.to(event.currentTarget, 1, { x: 0, y: 0, ease: Power4.easeOut })
         });
     });
-
     function moveMagnet(event) {
         document.getElementById('_cta').style.backgroundColor = color1;
         var magnetButton = event.currentTarget
@@ -152,12 +137,11 @@ $(document).ready(function () {
     // magnetic button
 
     //custom cursor
-    var cursorOutline = document.querySelector('.cursor_outline');
+    // var cursorOutline = document.querySelector('.cursor_outline');
     let cursor = document.querySelector('.cursor2');
     let cursorScale = document.querySelectorAll('.cursor-scale');
     let mouseX = 0;
     let mouseY = 0;
-
     gsap.to({}, 0.016, {
         repeat: -1,
         onRepeat: function () {
@@ -169,14 +153,13 @@ $(document).ready(function () {
             })
         }
     });
-
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
 
         var x = e.clientX;
         var y = e.clientY;
-        cursorOutline.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
+        // cursorOutline.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
 
     })
 
@@ -186,14 +169,14 @@ $(document).ready(function () {
             if (link.classList.contains('small')) {
                 //   cursor.classList.remove('grow');
                 cursor.classList.add('grow-small');
-                document.getElementById('cursor_outline').classList.add('d-none')
+                // document.getElementById('cursor_outline').classList.add('d-none')
             }
         });
 
         link.addEventListener('mouseleave', () => {
             // cursor.classList.remove('grow');
             cursor.classList.remove('grow-small');
-            document.getElementById('cursor_outline').classList.remove('d-none')
+            // document.getElementById('cursor_outline').classList.remove('d-none')
         });
     })
     //custom cursor
