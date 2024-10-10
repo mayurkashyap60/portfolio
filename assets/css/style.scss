@@ -112,6 +112,23 @@ header {
         line-height: 174%;
       }
     }
+    ._resume {
+      color: $primary;
+      text-decoration: none;
+      position: absolute;
+      top: auto;
+      bottom: 0px;
+      margin: auto;
+      width: fit-content;
+      left: 0;
+      right: 0;
+      background: $border;
+      padding: 2px 12px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      font-family: $Manrope-Light;
+      font-size: max(0.5vw, 14px);
+    }
   }
   ._about {
     position: relative;
@@ -419,7 +436,7 @@ header {
   .main ._profile {
     flex-direction: column;
     gap: 2rem;
-    padding: 6rem 0 3rem;
+    padding: 4rem 0 4rem;
   }
   .main ._profile ._content {
     padding-left: 0;
