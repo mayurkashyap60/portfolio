@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    console.log('working');
+    // console.log('working');
     // magnetic button  
     var magnets = document.querySelectorAll('.magnetic')
     var strength = 90;
