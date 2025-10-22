@@ -248,10 +248,15 @@ header {
           justify-content: center;
           align-items: center;
           flex-direction: column;
-          gap: 12px;
-          border: 2px solid rgba(202, 226, 254, 0.2509803922);
+          gap: 16px;
+          margin: 4px;
           padding: 1rem;
-          border-style: dashed;
+          border-radius: 4px;
+          background-color: #070d24;
+          transition: 0.8s background-color, 0.8s box-shadow;
+          &:hover {
+            box-shadow: 8px 12px 4px 0 #00000036;
+          }
           ._icon {
             width: 75px;
             height: auto;
