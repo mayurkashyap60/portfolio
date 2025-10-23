@@ -338,7 +338,7 @@ header {
   ._footer {
     position: relative;
     width: 100%;
-    padding: 4rem 0 2rem;
+    padding: 4rem 0 1rem;
     ._content {
       position: relative;
       @include flexboxB(flex-start, center, column);
@@ -387,12 +387,17 @@ header {
       position: relative;
       width: 100%;
       text-align: center;
+      padding-top: 1rem;
       ._ctext {
-        color: $primary;
+        color: $_ftext;
         font-family: $Manrope-Light;
-        font-size: max(0.9vw, 14px);
+        font-size: 12px;
         line-height: 164%;
         margin: 0;
+        a {
+          color: $primary;
+          font-family: $Manrope-SemiBold;
+        }
       }
     }
   }
@@ -423,7 +428,7 @@ header {
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .main {
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
   .main ._profile {
     flex-direction: column;
@@ -446,8 +451,11 @@ header {
   }
 }
 @media screen and (max-width: 767px) {
+  header {
+    padding-top: 2rem;
+  }
   .main {
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
   .main ._profile {
     flex-direction: column;
@@ -467,5 +475,15 @@ header {
   }
   .main ._skills {
     padding: 3rem 0rem 3rem;
+  }
+  .main ._skills ._content ._icon_box ._box {
+    width: 47.5%;
+    margin: 0;
+  }
+  .main ._footer ._copyright ._ctext {
+    font-size: 10px;
+  }
+  .main ._footer ._copyright ._ctext br {
+    display: none;
   }
 }

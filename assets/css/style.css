@@ -419,7 +419,7 @@ header nav ._navbar_wrapper ._socials ._social .platform:hover {
 .main ._footer {
   position: relative;
   width: 100%;
-  padding: 4rem 0 2rem;
+  padding: 4rem 0 1rem;
 }
 .main ._footer ._content {
   position: relative;
@@ -472,13 +472,18 @@ header nav ._navbar_wrapper ._socials ._social .platform:hover {
   position: relative;
   width: 100%;
   text-align: center;
+  padding-top: 1rem;
 }
 .main ._footer ._copyright ._ctext {
-  color: #f6f6f6;
+  color: rgba(202, 226, 254, 0.37);
   font-family: "Manrope-Light";
-  font-size: max(0.9vw, 14px);
+  font-size: 12px;
   line-height: 164%;
   margin: 0;
+}
+.main ._footer ._copyright ._ctext a {
+  color: #f6f6f6;
+  font-family: "Manrope-SemiBold";
 }
 @keyframes loop {
   from {
@@ -490,7 +495,7 @@ header nav ._navbar_wrapper ._socials ._social .platform:hover {
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .main {
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
   .main ._profile {
     flex-direction: column;
@@ -513,8 +518,11 @@ header nav ._navbar_wrapper ._socials ._social .platform:hover {
   }
 }
 @media screen and (max-width: 767px) {
+  header {
+    padding-top: 2rem;
+  }
   .main {
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
   .main ._profile {
     flex-direction: column;
@@ -534,5 +542,15 @@ header nav ._navbar_wrapper ._socials ._social .platform:hover {
   }
   .main ._skills {
     padding: 3rem 0rem 3rem;
+  }
+  .main ._skills ._content ._icon_box ._box {
+    width: 47.5%;
+    margin: 0;
+  }
+  .main ._footer ._copyright ._ctext {
+    font-size: 10px;
+  }
+  .main ._footer ._copyright ._ctext br {
+    display: none;
   }
 }/*# sourceMappingURL=style.css.map */
