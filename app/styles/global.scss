@@ -1,0 +1,393 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+::-moz-selection {
+  /* Code for Firefox */
+  background: $primary;
+  color: $black;
+}
+
+::selection {
+  background: $primary;
+  color: $black;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: $white;
+  font-family: $Manrope-Regular;
+  background: $base_bg;
+}
+
+.main {
+  position: relative;
+  max-width: 1024px;
+  width: 100%;
+  margin: auto;
+  padding: 0 1rem;
+  ._profile {
+    position: relative;
+    width: 100%;
+    @include flexboxB(flex-start, center, row);
+    padding: 6rem 0 6rem;
+    border-bottom: 1px solid $border;
+    ._profile_img {
+      max-width: 240px;
+      height: auto;
+      ._image {
+        width: 228px;
+        height: 228px;
+        object-fit: cover;
+        border-radius: 50%;
+        object-position: center;
+        border: 1px solid $third;
+      }
+    }
+    ._content {
+      position: relative;
+      padding-left: 4rem;
+      ._name {
+        color: $primary;
+        font-family: $SpaceGrotesk-Medium;
+        font-size: max(1.75vw, 2rem);
+        line-height: 124%;
+        margin-bottom: 8px;
+      }
+      ._designation {
+        color: $third;
+        font-family: $SpaceGrotesk-Medium;
+        font-size: max(1.45vw, 1.5rem);
+        line-height: 124%;
+        margin-bottom: 24px;
+      }
+      ._description {
+        color: $primary;
+        font-family: $Manrope-Regular;
+        font-size: max(1.1vw, 20px);
+        line-height: 174%;
+      }
+    }
+    ._resume {
+      color: $primary;
+      text-decoration: none;
+      position: absolute;
+      top: auto;
+      bottom: 0px;
+      margin: auto;
+      width: fit-content;
+      left: 0;
+      right: 0;
+      background: $border;
+      padding: 2px 12px;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      font-family: $Manrope-Light;
+      font-size: max(0.5vw, 14px);
+    }
+  }
+  ._about {
+    position: relative;
+    width: 100%;
+    padding: 4rem 0 4rem;
+    border-bottom: 1px solid $border;
+    ._content {
+      position: relative;
+      @include flexboxB(flex-start, flex-start, column);
+      gap: 1rem;
+      ._heading {
+        color: $white;
+        font-family: $SpaceGrotesk-SemiBold;
+        font-size: max(1.45vw, 26px);
+        line-height: 124%;
+        margin-bottom: 0;
+      }
+      ._text {
+        color: $primary;
+        font-family: $Manrope-Light;
+        font-size: max(1vw, 20px);
+        line-height: 164%;
+      }
+    }
+  }
+  ._experience {
+    position: relative;
+    width: 100%;
+    padding: 4rem 0 2rem;
+    border-bottom: 1px solid $border;
+    ._content {
+      position: relative;
+      @include flexboxB(flex-start, flex-start, column);
+      gap: 1rem;
+      ._heading {
+        color: $white;
+        font-family: $SpaceGrotesk-SemiBold;
+        font-size: max(1.45vw, 26px);
+        line-height: 124%;
+        margin-bottom: 0;
+      }
+      ._exp_boxes {
+        position: relative;
+        width: 100%;
+        @include flexboxA(flex-start, flex-start, row);
+        padding-top: 2rem;
+        ._exp_box {
+          position: relative;
+          max-width: 495px;
+          width: 100%;
+          @include flexboxB(flex-start, flex-start, row);
+          gap: 1rem;
+          margin-bottom: 3rem;
+          ._exp_icon {
+            position: relative;
+            border: 1px solid #6caeea;
+            width: 60px;
+            height: 60px;
+            padding: 15px;
+            border-radius: 5rem;
+            @include flexboxA(center, center, row);
+          }
+          ._exp_data {
+            position: relative;
+            width: fit-content;
+            ._exp_heading {
+              color: $white;
+              font-family: $SpaceGrotesk-SemiBold;
+              font-size: max(1vw, 20px);
+              line-height: 124%;
+              margin-bottom: 4px;
+            }
+            ._exp_text {
+              color: $subtitle;
+              font-family: $Manrope-Light;
+              font-size: max(0.75vw, 14px);
+              line-height: 164%;
+              margin: 0;
+              gap: 4px;
+              @include flexboxA(flex-start, center, row);
+              ._dot {
+                font-size: 72px;
+                position: relative;
+                transform: translateY(-1.5rem);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ._skills {
+    position: relative;
+    width: 100%;
+    padding: 4rem 0 4rem;
+    border-bottom: 1px solid $border;
+    ._content {
+      position: relative;
+      @include flexboxB(flex-start, flex-start, column);
+      gap: 1rem;
+      ._heading {
+        color: $white;
+        font-family: $SpaceGrotesk-SemiBold;
+        font-size: max(1.45vw, 26px);
+        line-height: 124%;
+        margin-bottom: 0;
+      }
+      ._icon_box {
+        position: relative;
+        width: 100%;
+        @include flexboxA(flex-start, flex-start, row);
+        margin-top: 1.5rem;
+        gap: 1rem;
+        ._box {
+          width: 162px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          gap: 16px;
+          margin: 4px;
+          padding: 1rem;
+          border-radius: 4px;
+          background-color: #070d24;
+          transition:
+            0.8s background-color,
+            0.8s box-shadow;
+          &:hover {
+            box-shadow: 8px 12px 4px 0 #00000036;
+          }
+          ._icon {
+            width: 75px;
+            height: auto;
+            max-height: 48px;
+            object-fit: contain;
+          }
+          ._heading {
+            color: $primary;
+            font-family: $Manrope-Light;
+            font-size: max(1vw, 18px);
+            line-height: 164%;
+          }
+        }
+      }
+    }
+  }
+  ._brands {
+    position: relative;
+    width: 100%;
+    padding: 4rem 0 4rem;
+    border-bottom: 1px solid $border;
+    ._content {
+      position: relative;
+      gap: 1rem;
+      ._heading {
+        color: $white;
+        font-family: $SpaceGrotesk-SemiBold;
+        font-size: max(1.45vw, 26px);
+        line-height: 124%;
+        margin-bottom: 1.25rem;
+      }
+      ._text {
+        color: $primary;
+        font-family: $Manrope-Light;
+        font-size: max(1vw, 20px);
+        line-height: 164%;
+      }
+      ._logos__marquee {
+        position: relative;
+        padding-top: 4rem;
+        display: flex;
+        overflow-x: hidden;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-mask-image: linear-gradient(
+          to right,
+          hsl(0 0% 0% / 0),
+          hsl(0 0% 0% / 1) 20%,
+          hsl(0 0% 0% / 1) 80%,
+          hsl(0 0% 0% / 0)
+        );
+        mask-image: linear-gradient(
+          to right,
+          hsl(0 0% 0% / 0),
+          hsl(0 0% 0% / 1) 20%,
+          hsl(0 0% 0% / 1) 80%,
+          hsl(0 0% 0% / 0)
+        );
+
+        ._marquee__logos {
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          gap: 1rem;
+          min-width: 100%;
+          -webkit-animation: loop 70s linear infinite;
+          animation: loop 70s linear infinite;
+          img {
+            display: block;
+            margin-inline: 2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@-webkit-keyframes loop {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-5084px);
+  }
+}
+
+@keyframes loop {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-5084px);
+  }
+}
+
+// media queries
+@media only screen and (min-width: 993px) and (max-width: 1024px) {
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .main {
+    padding: 0 1rem;
+  }
+  .main ._profile {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 6rem 0 3rem;
+  }
+  .main ._profile ._content {
+    padding-left: 0;
+    text-align: center;
+  }
+  ._footer {
+    padding: 4rem 1rem 1rem;
+  }
+  ._footer ._content {
+    text-align: center;
+  }
+  .main ._about,
+  .main ._experience {
+    padding: 3rem 0 2rem;
+  }
+  .main ._skills {
+    padding: 3rem 0rem 3rem;
+  }
+}
+@media screen and (max-width: 767px) {
+  header {
+    padding-top: 2rem;
+  }
+  .main {
+    padding: 0 1rem;
+  }
+  .main ._profile {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 4rem 0 4rem;
+  }
+  .main ._profile ._content {
+    padding-left: 0;
+    text-align: center;
+  }
+  .main ._about,
+  .main ._experience {
+    padding: 3rem 0 2rem;
+  }
+  .main ._skills {
+    padding: 3rem 0rem 3rem;
+  }
+  .main ._skills ._content ._icon_box ._box {
+    width: 47.5%;
+    margin: 0;
+  }
+  ._footer {
+    padding: 4rem 1rem 1rem;
+  }
+  ._footer ._content {
+    text-align: center;
+  }
+  ._footer ._copyright ._ctext {
+    font-size: 10px;
+  }
+  ._footer ._copyright ._ctext br {
+    display: none;
+  }
+}

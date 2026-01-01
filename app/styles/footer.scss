@@ -1,0 +1,73 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+._footer {
+  position: relative;
+  padding: 4rem 0 1rem;
+  max-width: 1024px;
+  width: 100%;
+  margin: auto;
+  ._content {
+    position: relative;
+    @include flexboxB(flex-start, center, column);
+    gap: 1rem;
+    ._heading {
+      color: $white;
+      font-family: $SpaceGrotesk-SemiBold;
+      font-size: max(1.45vw, 26px);
+      line-height: 124%;
+      margin-bottom: 0;
+    }
+    ._text {
+      color: $primary;
+      font-family: $Manrope-Light;
+      font-size: max(1vw, 20px);
+      line-height: 164%;
+      text-align: center;
+    }
+    ._cta {
+      width: 195px;
+      height: 195px;
+      margin: 3rem auto 4.5rem;
+      background-color: $primary;
+      color: $base_bg;
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      font-size: max(1vw, 20px);
+      text-align: center;
+      text-decoration: none;
+      line-height: 38px;
+      font-family: $SpaceGrotesk-Medium;
+      outline: 1px solid $secondary;
+      // cursor: none;
+      transition:
+        0.8s background-color,
+        0.8s box-shadow;
+      box-shadow: 0px 0px 20px 20px $primary;
+      &:hover {
+        box-shadow: 3px 10px 20px 4px $third;
+        background: $base_bg;
+        color: $primary;
+      }
+    }
+  }
+  ._copyright {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding-top: 1rem;
+    ._ctext {
+      color: $ftext;
+      font-family: $Manrope-Light;
+      font-size: 12px;
+      line-height: 164%;
+      margin: 0;
+      a {
+        color: $primary;
+        font-family: $Manrope-SemiBold;
+      }
+    }
+  }
+}
