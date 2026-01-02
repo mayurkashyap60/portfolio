@@ -1,0 +1,556 @@
+@font-face {
+  font-family: "Manrope-Bold";
+  src: url("../fonts/Manrope/Manrope-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-ExtraBold";
+  src: url("../fonts/Manrope/Manrope-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-ExtraLight";
+  src: url("../fonts/Manrope/Manrope-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-Light";
+  src: url("../fonts/Manrope/Manrope-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-Medium";
+  src: url("../fonts/Manrope/Manrope-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-Regular";
+  src: url("../fonts/Manrope/Manrope-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Manrope-SemiBold";
+  src: url("../fonts/Manrope/Manrope-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SpaceGrotesk-Bold";
+  src: url("../fonts/Space_Grotesk/SpaceGrotesk-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SpaceGrotesk-Light";
+  src: url("../fonts/Space_Grotesk/SpaceGrotesk-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SpaceGrotesk-Medium";
+  src: url("../fonts/Space_Grotesk/SpaceGrotesk-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SpaceGrotesk-Regular";
+  src: url("../fonts/Space_Grotesk/SpaceGrotesk-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SpaceGrotesk-SemiBold";
+  src: url("../fonts/Space_Grotesk/SpaceGrotesk-SemiBold.ttf") format("truetype");
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-moz-selection {
+  /* Code for Firefox */
+  background: #f6f6f6;
+  color: #000;
+}
+
+::selection {
+  background: #f6f6f6;
+  color: #000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: "Manrope-Regular";
+  background: rgb(4, 9, 27);
+  height: 100vh;
+}
+
+header {
+  position: relative;
+  max-width: 1024px;
+  width: 100%;
+  margin: auto;
+  padding: 4rem 1rem 0rem;
+}
+header nav {
+  position: relative;
+  z-index: 2;
+}
+header nav ._navbar_wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+header nav ._navbar_wrapper ._socials {
+  position: relative;
+}
+header nav ._navbar_wrapper ._socials ._social {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  list-style: none;
+  margin: 0;
+  gap: 24px;
+}
+header nav ._navbar_wrapper ._socials ._social .platform {
+  display: block;
+  transition: 0.7s ease-in-out;
+  padding: 8px;
+}
+header nav ._navbar_wrapper ._socials ._social .platform:hover {
+  transform: translateY(-8px);
+}
+
+.main {
+  position: relative;
+  max-width: 1024px;
+  width: 100%;
+  margin: auto;
+  padding: 0 1rem;
+}
+.main ._profile {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  padding: 6rem 0 6rem;
+  border-bottom: 1px solid rgba(202, 226, 254, 0.2509803922);
+}
+.main ._profile ._profile_img {
+  max-width: 240px;
+  height: auto;
+}
+.main ._profile ._profile_img ._image {
+  width: 228px;
+  height: 228px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  -o-object-position: center;
+     object-position: center;
+  border: 1px solid #6caeea;
+}
+.main ._profile ._content {
+  position: relative;
+  padding-left: 4rem;
+}
+.main ._profile ._content ._name {
+  color: #f6f6f6;
+  font-family: "SpaceGrotesk-Medium";
+  font-size: max(1.75vw, 2rem);
+  line-height: 124%;
+  margin-bottom: 8px;
+}
+.main ._profile ._content ._designation {
+  color: #6caeea;
+  font-family: "SpaceGrotesk-Medium";
+  font-size: max(1.45vw, 1.5rem);
+  line-height: 124%;
+  margin-bottom: 24px;
+}
+.main ._profile ._content ._description {
+  color: #f6f6f6;
+  font-family: "Manrope-Regular";
+  font-size: max(1.1vw, 20px);
+  line-height: 174%;
+}
+.main ._profile ._resume {
+  color: #f6f6f6;
+  text-decoration: none;
+  position: absolute;
+  top: auto;
+  bottom: 0px;
+  margin: auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  left: 0;
+  right: 0;
+  background: rgba(202, 226, 254, 0.2509803922);
+  padding: 2px 12px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-family: "Manrope-Light";
+  font-size: max(0.5vw, 14px);
+}
+.main ._about {
+  position: relative;
+  width: 100%;
+  padding: 4rem 0 4rem;
+  border-bottom: 1px solid rgba(202, 226, 254, 0.2509803922);
+}
+.main ._about ._content {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  gap: 1rem;
+}
+.main ._about ._content ._heading {
+  color: #fff;
+  font-family: "SpaceGrotesk-SemiBold";
+  font-size: max(1.45vw, 26px);
+  line-height: 124%;
+  margin-bottom: 0;
+}
+.main ._about ._content ._text {
+  color: #f6f6f6;
+  font-family: "Manrope-Light";
+  font-size: max(1vw, 20px);
+  line-height: 164%;
+}
+.main ._experience {
+  position: relative;
+  width: 100%;
+  padding: 4rem 0 2rem;
+  border-bottom: 1px solid rgba(202, 226, 254, 0.2509803922);
+}
+.main ._experience ._content {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  gap: 1rem;
+}
+.main ._experience ._content ._heading {
+  color: #fff;
+  font-family: "SpaceGrotesk-SemiBold";
+  font-size: max(1.45vw, 26px);
+  line-height: 124%;
+  margin-bottom: 0;
+}
+.main ._experience ._content ._exp_boxes {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding-top: 2rem;
+}
+.main ._experience ._content ._exp_boxes ._exp_box {
+  position: relative;
+  max-width: 495px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.main ._experience ._content ._exp_boxes ._exp_box ._exp_icon {
+  position: relative;
+  border: 1px solid #6caeea;
+  width: 60px;
+  height: 60px;
+  padding: 15px;
+  border-radius: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.main ._experience ._content ._exp_boxes ._exp_box ._exp_data {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.main ._experience ._content ._exp_boxes ._exp_box ._exp_data ._exp_heading {
+  color: #fff;
+  font-family: "SpaceGrotesk-SemiBold";
+  font-size: max(1vw, 20px);
+  line-height: 124%;
+  margin-bottom: 4px;
+}
+.main ._experience ._content ._exp_boxes ._exp_box ._exp_data ._exp_text {
+  color: rgb(182, 188, 206);
+  font-family: "Manrope-Light";
+  font-size: max(0.75vw, 14px);
+  line-height: 164%;
+  margin: 0;
+  gap: 4px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.main ._experience ._content ._exp_boxes ._exp_box ._exp_data ._exp_text ._dot {
+  font-size: 72px;
+  position: relative;
+  transform: translateY(-1.5rem);
+}
+.main ._skills {
+  position: relative;
+  width: 100%;
+  padding: 4rem 0 4rem;
+  border-bottom: 1px solid rgba(202, 226, 254, 0.2509803922);
+}
+.main ._skills ._content {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  gap: 1rem;
+}
+.main ._skills ._content ._heading {
+  color: #fff;
+  font-family: "SpaceGrotesk-SemiBold";
+  font-size: max(1.45vw, 26px);
+  line-height: 124%;
+  margin-bottom: 0;
+}
+.main ._skills ._content ._icon_box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+.main ._skills ._content ._icon_box ._box {
+  width: 162px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  margin: 4px;
+  padding: 1rem;
+  border-radius: 4px;
+  background-color: #070d24;
+  transition: 0.8s background-color, 0.8s box-shadow;
+}
+.main ._skills ._content ._icon_box ._box:hover {
+  box-shadow: 8px 12px 4px 0 rgba(0, 0, 0, 0.2117647059);
+}
+.main ._skills ._content ._icon_box ._box ._icon {
+  width: 75px;
+  height: auto;
+  max-height: 48px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.main ._skills ._content ._icon_box ._box ._heading {
+  color: #f6f6f6;
+  font-family: "Manrope-Light";
+  font-size: max(1vw, 18px);
+  line-height: 164%;
+}
+.main ._brands {
+  position: relative;
+  width: 100%;
+  padding: 4rem 0 4rem;
+  border-bottom: 1px solid rgba(202, 226, 254, 0.2509803922);
+}
+.main ._brands ._content {
+  position: relative;
+  gap: 1rem;
+}
+.main ._brands ._content ._heading {
+  color: #fff;
+  font-family: "SpaceGrotesk-SemiBold";
+  font-size: max(1.45vw, 26px);
+  line-height: 124%;
+  margin-bottom: 1.25rem;
+}
+.main ._brands ._content ._text {
+  color: #f6f6f6;
+  font-family: "Manrope-Light";
+  font-size: max(1vw, 20px);
+  line-height: 164%;
+}
+.main ._brands ._content ._logos__marquee {
+  position: relative;
+  padding-top: 4rem;
+  display: flex;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(to right, hsla(0, 0%, 0%, 0), hsl(0, 0%, 0%) 20%, hsl(0, 0%, 0%) 80%, hsla(0, 0%, 0%, 0));
+  mask-image: linear-gradient(to right, hsla(0, 0%, 0%, 0), hsl(0, 0%, 0%) 20%, hsl(0, 0%, 0%) 80%, hsla(0, 0%, 0%, 0));
+}
+.main ._brands ._content ._logos__marquee ._marquee__logos {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1rem;
+  min-width: 100%;
+  animation: loop 70s linear infinite;
+}
+.main ._brands ._content ._logos__marquee ._marquee__logos img {
+  display: block;
+  margin-inline: 2rem;
+}
+.main ._footer {
+  position: relative;
+  width: 100%;
+  padding: 4rem 0 1rem;
+}
+.main ._footer ._content {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  gap: 1rem;
+}
+.main ._footer ._content ._heading {
+  color: #fff;
+  font-family: "SpaceGrotesk-SemiBold";
+  font-size: max(1.45vw, 26px);
+  line-height: 124%;
+  margin-bottom: 0;
+}
+.main ._footer ._content ._text {
+  color: #f6f6f6;
+  font-family: "Manrope-Light";
+  font-size: max(1vw, 20px);
+  line-height: 164%;
+  text-align: center;
+}
+.main ._footer ._content ._cta {
+  width: 195px;
+  height: 195px;
+  margin: 3rem auto 4.5rem;
+  background-color: #f6f6f6;
+  color: rgb(4, 9, 27);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: max(1vw, 20px);
+  text-align: center;
+  text-decoration: none;
+  line-height: 38px;
+  font-family: "SpaceGrotesk-Medium";
+  outline: 1px solid #cae2fe;
+  transition: 0.8s background-color, 0.8s box-shadow;
+  box-shadow: 0px 0px 20px 20px #f6f6f6;
+}
+.main ._footer ._content ._cta:hover {
+  box-shadow: 3px 10px 20px 4px #6caeea;
+  background: rgb(4, 9, 27);
+  color: #f6f6f6;
+}
+.main ._footer ._copyright {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  padding-top: 1rem;
+}
+.main ._footer ._copyright ._ctext {
+  color: rgba(202, 226, 254, 0.37);
+  font-family: "Manrope-Light";
+  font-size: 12px;
+  line-height: 164%;
+  margin: 0;
+}
+.main ._footer ._copyright ._ctext a {
+  color: #f6f6f6;
+  font-family: "Manrope-SemiBold";
+}
+@keyframes loop {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-5084px);
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .main {
+    padding: 0 1rem;
+  }
+  .main ._profile {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 6rem 0 3rem;
+  }
+  .main ._profile ._content {
+    padding-left: 0;
+    text-align: center;
+  }
+  .main ._footer ._content {
+    text-align: center;
+  }
+  .main ._about,
+  .main ._experience {
+    padding: 3rem 0 2rem;
+  }
+  .main ._skills {
+    padding: 3rem 0rem 3rem;
+  }
+}
+@media screen and (max-width: 767px) {
+  header {
+    padding-top: 2rem;
+  }
+  .main {
+    padding: 0 1rem;
+  }
+  .main ._profile {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 4rem 0 4rem;
+  }
+  .main ._profile ._content {
+    padding-left: 0;
+    text-align: center;
+  }
+  .main ._footer ._content {
+    text-align: center;
+  }
+  .main ._about,
+  .main ._experience {
+    padding: 3rem 0 2rem;
+  }
+  .main ._skills {
+    padding: 3rem 0rem 3rem;
+  }
+  .main ._skills ._content ._icon_box ._box {
+    width: 47.5%;
+    margin: 0;
+  }
+  .main ._footer ._copyright ._ctext {
+    font-size: 10px;
+  }
+  .main ._footer ._copyright ._ctext br {
+    display: none;
+  }
+}/*# sourceMappingURL=style.css.map */
