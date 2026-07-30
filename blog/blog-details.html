@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What's Happening in the AI Industry? 2026 Reality Check</title>
+  <meta name="description"
+    content="Model wars, $700B capex, agent ROI failures and new AI rules. A grounded look at what's actually happening in the AI industry in 2026." />
+  <link rel="canonical" href="https://www.mayurkashyap.com/blog/whats-happening-ai-industry-2026" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
+  <meta name="author" content="Mayur Kashyap" />
+  <meta name="publisher" content="Mayur Kashyap" />
+  <meta http-equiv="content-language" content="en-IN" />
+  <link rel="alternate" type="application/rss+xml" href="https://www.mayurkashyap.com/rss/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Mayur Kashyap" />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:url" content="https://www.mayurkashyap.com/blog/whats-happening-ai-industry-2026" />
+  <meta property="og:title" content="What's Actually Happening in the AI Industry in 2026" />
+  <meta property="og:description"
+    content="Five frontier labs, open weights resetting prices, $700B in capex, and only 41% of AI agent rollouts hitting positive ROI. A grounded mid-2026 read." />
+  <meta property="og:image" content="https://www.mayurkashyap.com/images/blogs/whats-going-on-in-the-ai-industry.jpg" />
+  <meta property="og:image:secure_url"
+    content="https://www.mayurkashyap.com/images/blogs/whats-going-on-in-the-ai-industry.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"
+    content="Editorial illustration of the 2026 AI industry: interconnected data centre towers, rising capex curve and regulatory checkpoints." />
+
+  <meta property="article:published_time" content="2026-07-30T09:00:00+05:30" />
+  <meta property="article:modified_time" content="2026-07-30T09:00:00+05:30" />
+  <meta property="article:author" content="https://www.mayurkashyap.com/" />
+  <meta property="article:section" content="Artificial Intelligence" />
+  <meta property="article:tag" content="AI industry" />
+  <meta property="article:tag" content="AI trends 2026" />
+  <meta property="article:tag" content="Agentic AI" />
+  <meta property="article:tag" content="AI regulation" />
+  <meta property="article:tag" content="Enterprise AI" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@mayurkashyap" />
+  <meta name="twitter:creator" content="@mayurkashyap" />
+  <meta name="twitter:title" content="What's Actually Happening in AI in 2026" />
+  <meta name="twitter:description"
+    content="88% of companies use AI. 12% of CEOs see both revenue gain and cost savings. That gap is the whole story of 2026." />
+  <meta name="twitter:image"
+    content="https://www.mayurkashyap.com/images/blogs/whats-going-on-in-the-ai-industry.jpg" />
+  <meta name="twitter:image:alt"
+    content="Editorial illustration of the 2026 AI industry landscape with data centres, a rising cost curve and regulatory checkpoints." />
+  <meta name="twitter:label1" content="Reading time" />
+  <meta name="twitter:data1" content="12 minutes" />
+  <meta name="twitter:label2" content="Updated" />
+  <meta name="twitter:data2" content="30 July 2026" />
+
+  <!-- JSON-LD Schemas -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://www.mayurkashyap.com/blog/whats-happening-ai-industry-2026#faq",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the biggest change in the AI industry in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cost and competition. Capable models became dramatically cheaper, largely because of open-weight releases such as DeepSeek V4 and Kimi K3, while the frontier expanded from two credible labs to five or six. Capability gains continued, but the commercial shift was price."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the AI industry in a bubble in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compute demand is real and supply-constrained, which argues against a pure bubble. However, hyperscaler capital expenditure has outrun operating cash flow, several hundred billion dollars in data centre leases sit off balance sheet, and multiple trillion-dollar IPOs are queued in the same window. The cycle shows features of both the fibre-optic bust and the cloud buildout, and confident predictions in either direction should be discounted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are AI agents actually working in enterprises?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Deployment is near-universal but value capture is not. Around 80% of enterprises report at least one production application with an embedded agent, yet only about 41% of rollouts reach positive ROI within twelve months, and Gartner expects over 40% of agentic AI projects to be cancelled by the end of 2027. Data quality and governance, not model choice, are the differentiators."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does India have an AI law?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "India has no dedicated horizontal AI law. Its approach, set out in MeitY's India AI Governance Guidelines under the IndiaAI Mission, is voluntary and principles-based, with sectoral regulators such as the RBI, SEBI and TRAI applying the principles in their own domains. In financial services the binding pressure comes through the RBI's FREE-AI framework and DPDP privacy rules."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What changes in the EU on 2 August 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The EU AI Act's Article 50 transparency obligations apply, including machine-readable marking of AI-generated content. Systems already on the market before that date have until 2 December 2026. High-risk obligations for standalone Annex III systems were deferred to 2 December 2027 under the Digital Omnibus on AI."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is AI taking jobs in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not in aggregate so far. The measurable effect is narrower: the entry-level rung of AI-exposed knowledge occupations has become harder to reach, and exposure skews toward higher-paid, more-educated work. Most announced AI-linked headcount reductions appear anticipatory rather than tied to completed implementations."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": "https://www.mayurkashyap.com/blog/whats-happening-ai-industry-2026#article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.mayurkashyap.com/blog/whats-happening-ai-industry-2026"
+    },
+    "headline": "What's Going On in the AI Industry? A Mid-2026 Reality Check",
+    "alternativeHeadline": "AI industry trends 2026: models, money, agents, regulation and jobs",
+    "description": "A grounded analysis of what changed in the AI industry through mid-2026: frontier model competition, open-weight price pressure, hyperscaler capex, enterprise agent ROI, EU and Indian AI regulation, and labour market evidence.",
+    "articleSection": "Artificial Intelligence",
+    "wordCount": 2900,
+    "inLanguage": "en-IN",
+    "datePublished": "2026-07-30T09:00:00+05:30",
+    "dateModified": "2026-07-30T09:00:00+05:30",
+    "url": "https://www.mayurkashyap.com/blog/whats-happening-ai-industry-2026",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.mayurkashyap.com/images/blogs/whats-going-on-in-the-ai-industry.jpg",
+      "width": 1200,
+      "height": 630
+    },
+    "author": {
+      "@type": "Person",
+      "@id": "https://www.mayurkashyap.com#person",
+      "name": "Mayur Kashyap",
+      "url": "https://www.mayurkashyap.com/",
+      "jobTitle": "Senior Software Engineer",
+      "sameAs": [
+        "https://www.linkedin.com/in/mayur-kashyap",
+        "https://github.com/mayurkashyap60"
+      ]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://www.mayurkashyap.com#organization",
+      "name": "Mayur Kashyap",
+      "url": "https://www.mayurkashyap.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.mayurkashyap.com/images/logo.png",
+        "width": 512,
+        "height": 512
+      }
+    },
+    "keywords": "what's happening in the AI industry, AI industry trends 2026, AI industry news 2026, agentic AI, enterprise AI adoption, open-weight AI models, AI regulation 2026, EU AI Act, India AI Governance Guidelines, RBI FREE-AI, AI capex",
+    "about": [
+      { "@type": "Thing", "name": "Artificial intelligence industry" },
+      { "@type": "Thing", "name": "Generative artificial intelligence" },
+      { "@type": "Thing", "name": "AI regulation" },
+      { "@type": "Thing", "name": "Enterprise software adoption" }
+    ],
+    "mentions": [
+      { "@type": "Organization", "name": "OpenAI" },
+      { "@type": "Organization", "name": "Anthropic" },
+      { "@type": "Organization", "name": "Google DeepMind" },
+      { "@type": "Organization", "name": "Moonshot AI" },
+      { "@type": "Organization", "name": "DeepSeek" },
+      { "@type": "Organization", "name": "European Commission" },
+      { "@type": "GovernmentOrganization", "name": "Reserve Bank of India" },
+      { "@type": "GovernmentOrganization", "name": "Ministry of Electronics and Information Technology" }
+    ],
+    "isAccessibleForFree": true,
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": ["h1", ".article-intro", ".faq-section"]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mayurkashyap.com" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.mayurkashyap.com/blog.html" },
+      { "@type": "ListItem", "position": 3, "name": "Artificial Intelligence", "item": "https://www.mayurkashyap.com/blog.html#ai" },
+      { "@type": "ListItem", "position": 4, "name": "What's Going On in the AI Industry?", "item": "https://www.mayurkashyap.com/blog/whats-happening-ai-industry-2026" }
+    ]
+  }
+  </script>
+
+  <meta name="theme-color" content="#060608" />
+  <link rel="icon" type="image/png" href="../images/favicon.png" />
+
+  <link rel="stylesheet" href="../css/fonts.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/blog.css" />
+
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="header is-scrolled">
+    <a class="header__logo" href="../index.html" aria-label="Mayur Kashyap — back to home">
+      <img src="../images/logo.svg" alt="Mayur Kashyap" width="932" height="164" style="transform: scale(.85);" />
+    </a>
+    <a class="header__cta mono magnetic" href="blog.html">ALL ARTICLES <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="article">
+    <div class="container">
+      <header class="article-header">
+        <div class="article__meta mono">
+          <span class="article__tag">AI / INDUSTRY</span>
+          <span>12 MIN READ</span>
+          <span>30 JULY 2026</span>
+        </div>
+        <h1 class="article__title" data-split>What's Happening in the AI Industry? A Mid-2026 Reality Check</h1>
+        <p class="article__sub">The technology got better, much cheaper, and considerably more contested
+          — all at the same time. Here's what's actually changed in AI in 2026.</p>
+      </header>
+
+      <figure class="article-banner">
+        <img src="../images/blogs/whats-going-on-in-the-ai-industry.jpg" alt="What's Going On in the AI Industry" />
+      </figure>
+
+      <div class="article-body">
+        <p><em>Last updated: 30 July 2026</em></p>
+
+        <p>I gave up trying to read every AI announcement sometime in March. It wasn't a discipline decision — it was
+          arithmetic. Model trackers were logging north of 330 releases across major labs, and by the time you'd
+          finished evaluating one flagship model, two cheaper ones had shipped that did 90% of the job.</p>
+
+        <p>So instead of another news dump, here's what's happening in the AI industry in 2026, and what it means
+          for AI industry trends 2026 if you're building products, buying tools, or just trying to explain to your
+          leadership why the demo from
+          January doesn't look impressive anymore.</p>
+
+        <p>Short version: the technology got better, much cheaper, and considerably more contested — all at the same
+          time.</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <h2>1. AI industry trends 2026: The frontier model race is no longer a two-horse race</h2>
+
+        <p>For about two years, "who's winning AI" was a question about OpenAI and Google. That framing has aged badly.
+        </p>
+
+        <p>July alone was crowded. OpenAI's GPT-5.6 line (shipped in Sol, Terra and Luna tiers) reached general
+          availability on 9 July, and xAI opened Grok 4.5 to the public the same day. Anthropic closed the month by
+          releasing Claude Opus 5 on 24 July, a few weeks after restoring worldwide access to Claude Fable 5 following a
+          brief US export-control pause. Google shipped Gemini 3.6 Flash and 3.5 Flash-Lite on 21 July.</p>
+
+        <p>The interesting story in that list is what's <em>missing</em>. Gemini 3.5 Pro — Google's flagship, publicly
+          promised at I/O in May — has now slipped past several internal targets and, as of the end of July, still
+          hadn't shipped. Reporting through June and July tied the delay to a full architecture rebuild and a run of
+          senior DeepMind departures, and Alphabet's stock took visible hits on the news.</p>
+
+        <p>That matters more than a benchmark point. <strong>Enterprise procurement calendars are real.</strong> Every
+          quarter a model isn't available is a quarter someone else's model gets embedded into a workflow, a contract,
+          and a developer's muscle memory. Availability is now a competitive weapon in a way it wasn't in 2024.</p>
+
+        <h3>What's actually table stakes now</h3>
+
+        <p>If you last evaluated models 12 months ago, your mental model is out of date. As of mid-2026:</p>
+
+        <ul>
+          <li><strong>Million-token context windows</strong> are standard on flagship models, not a differentiator.</li>
+          <li><strong>Extended reasoning</strong> ships on by default rather than as a separate "thinking" product.</li>
+          <li><strong>Native multimodality</strong> — text, image, audio, video in one model — is the baseline
+            expectation.</li>
+          <li><strong>Computer use / tool calling</strong> is built into mainstream mid-tier models, not just frontier
+            ones.</li>
+        </ul>
+
+        <p>The competitive question moved from "can it do this?" to "how much does it cost per task, and how reliably
+          does it finish?"</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <h2>2. Open-weight AI models became the industry's price ceiling</h2>
+
+        <p>This is the shift I'd flag hardest to anyone signing an AI contract this quarter.</p>
+
+        <p>The last week of July was probably the densest stretch of open-weight releases the industry has seen.
+          DeepSeek's V4 family reached general availability on 24 July under an MIT licence. Moonshot AI released Kimi
+          K3's weights on 27 July — reported at roughly 2.8 trillion parameters with a one-million-token context window,
+          making it the largest open-weight model released to date. Thinking Machines put out its first model, a
+          975B-parameter system called Inkling.</p>
+
+        <p>The point isn't that open models beat closed ones on every benchmark. Some independent evaluators ranked K3
+          ahead of V4-Pro; others didn't. The point is pricing pressure. When a credible open-weight model serves output
+          tokens at a small fraction of frontier closed-model rates, every CFO gets a sharper version of the same
+          question: <strong>what exactly are we paying the premium for on routine workloads?</strong></p>
+
+        <p>For most teams the honest answer is "not all of it." Which is why <em>model routing</em> — sending simple
+          queries to cheap fast models and reserving frontier models for genuinely hard tasks — has quietly become
+          standard architecture rather than a clever optimisation.</p>
+
+        <p>There's a geopolitical layer too. The open-weight momentum in 2026 has come disproportionately from Chinese
+          labs, and it hasn't gone unnoticed in Washington. A White House official publicly accused Moonshot AI of
+          export-control violations on 22 July, and reporting in late July suggested the US administration was
+          finalising a pre-release review framework for frontier models with OpenAI, Anthropic and Google. Treat the
+          specifics there as reported rather than settled — the details were still moving as of publication.</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <h2>3. The money got genuinely strange</h2>
+
+        <p>Three numbers frame the AI industry in 2026.</p>
+
+        <p><strong>Capex.</strong> The big five hyperscalers — Amazon, Microsoft, Alphabet, Meta and Oracle — are on
+          track to spend somewhere in the region of <strong>$600–725 billion</strong> on infrastructure in 2026,
+          depending on whose tally you use. Estimates vary because guidance keeps getting revised upward. Roughly
+          three-quarters of it is AI-specific: GPUs, high-bandwidth memory, networking, power. For scale, the same group
+          spent around $160 billion in 2022. Every one of them reports being supply-constrained rather than
+          demand-constrained.</p>
+
+        <p><strong>Debt.</strong> AI capex 2026 has now outrun operating cash flow at several of these companies, which
+          is new.
+          Analyst estimates for technology-sector debt issuance to fund the buildout run into the hundreds of billions,
+          with some projections reaching $1.5 trillion over the next few years. Moody's also flagged in early 2026 that
+          hyperscalers hold several hundred billion dollars in signed-but-not-yet-commenced data centre leases, which
+          sit off the balance sheet under current lease accounting. That's not fraud — it's standard GAAP treatment —
+          but it does mean the headline capex figure understates the total commitment.</p>
+
+        <p><strong>IPOs.</strong> Anthropic filed confidentially with the SEC on 1 June 2026 following a Series H round
+          that valued it near $965 billion, with a Nasdaq listing reported as a target for around October. Secondary
+          markets have priced it above the trillion-dollar mark, though secondary pricing for a company that hasn't
+          published an S-1 is speculative by definition. OpenAI has reportedly pushed its own listing to 2027. SpaceX
+          went public in June. If two or three trillion-dollar listings land in the same window, that's the largest
+          concentration of capital brought to market simultaneously in history.</p>
+
+        <p>So — is it a bubble? The honest answer is that the AI capex cycle currently shows features of both the
+          telecom fibre boom (which destroyed enormous equity value) and the cloud buildout (which delivered returns for
+          fifteen years). Compute demand is real and measurable. Whether it's <em>this</em> real, on <em>this</em>
+          schedule, at <em>this</em> price, is the open question. Anyone who tells you they know is selling something.
+        </p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <h2>4. Agentic AI and AI agents 2026 went into production — and roughly half of it isn't working</h2>
+
+        <p>2026 was supposed to be the year of AI agents. It sort of was. Just not the way the keynote slides implied.
+        </p>
+
+        <p>The adoption numbers are genuinely high. Depending on the survey, 88–91% of organisations now use AI in at
+          least one business function, and Gartner's Q1 2026 research had around 80% of enterprises reporting at least
+          one production application with an embedded agent — up from about a third in 2024. Financial services and
+          insurance lead sectoral deployment.</p>
+
+        <p>The outcome numbers are much less flattering:</p>
+
+        <div style="overflow-x: auto; margin-bottom: 24px;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--line);">
+                <th style="padding: 12px; color: var(--text);">Metric</th>
+                <th style="padding: 12px; color: var(--text);">Reported figure</th>
+                <th style="padding: 12px; color: var(--text);">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                <td style="padding: 12px;">CEOs reporting both revenue gain <em>and</em> cost reduction from AI</td>
+                <td style="padding: 12px;">12%</td>
+                <td style="padding: 12px;">PwC Global CEO Survey 2026 (4,454 execs)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                <td style="padding: 12px;">CEOs reporting no significant financial benefit yet</td>
+                <td style="padding: 12px;">56%</td>
+                <td style="padding: 12px;">PwC, Jan 2026</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                <td style="padding: 12px;">Agent rollouts reaching positive ROI within 12 months</td>
+                <td style="padding: 12px;">~41%</td>
+                <td style="padding: 12px;">BCG / Forrester 2026</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                <td style="padding: 12px;">Median payback period where it works</td>
+                <td style="padding: 12px;">~5.1 months</td>
+                <td style="padding: 12px;">BCG / Forrester 2026</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px;">Agentic AI / AI agents 2026 projects forecast to be cancelled by end-2027
+                </td>
+                <td style="padding: 12px;">>40%</td>
+                <td style="padding: 12px;">Gartner</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Read those two blocks together and you get the defining tension of enterprise AI adoption in 2026:
+          <strong>near-universal deployment, narrow value capture.</strong>
+        </p>
+
+        <p>The failure analysis is the useful part, because it's boring. Forrester's root-cause work attributes most
+          negative-ROI agent deployments to unclear success criteria, insufficient tool or data access, and drift in
+          evaluation coverage — not model quality. Gartner has consistently found that data readiness, not model
+          capability, is the binding constraint. Teams that succeed tend to share an unglamorous profile: a named owner
+          with budget authority, evaluation coverage treated as the production-readiness gate, and the workflow designed
+          <em>before</em> the agent.
+        </p>
+
+        <p>If you take one thing from this section: the people winning at agentic AI in 2026 aren't the ones with the
+          best model. They're the ones who scoped the problem properly.</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <h2>5. AI regulation 2026 stopped being theoretical</h2>
+
+        <p>Two dates matter, and one of them is days away. The EU AI Act August 2026 deadline is rapidly approaching.
+        </p>
+
+        <p><strong>2 August 2026.</strong> The EU AI Act's Article 50 transparency obligations apply from this date —
+          including requirements to mark AI-generated audio, image, video and text in machine-readable form. The heavier
+          high-risk obligations were pushed back: the Digital Omnibus on AI, adopted by the European Parliament on 16
+          June and the Council on 29 June 2026, deferred standalone Annex III high-risk requirements to <strong>2
+            December 2027</strong>, and embedded Annex I systems to <strong>2 August 2028</strong>. Legacy systems
+          already on the market get until 2 December 2026 for the content-marking rules. The Omnibus also added a new
+          prohibition on AI systems used to generate non-consensual intimate imagery and CSAM.</p>
+
+        <p>Worth being precise here, because there's a lot of loose commentary: the deadlines moved, the obligations
+          didn't. Anyone treating the delay as a reprieve rather than runway is going to have a bad 2027.</p>
+
+        <p><strong>The DMA decision.</strong> In July, the European Commission ordered Google to open Android to rival
+          AI assistants and to share portions of its search data with competitors, including AI developers. Third-party
+          assistants get voice activation and cross-app capability across a set of Android feature groups, subject to
+          certification and user consent. Search data sharing begins January 2027; Android interoperability is due by
+          July 2027. This is arguably the most consequential regulatory action in AI this year, because it targets
+          distribution rather than capability — and distribution is where incumbency actually lives.</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <h2>6. The India picture: deployment-first under India AI Governance Guidelines</h2>
+
+        <p>India has taken a visibly different route from Brussels: <strong>no horizontal AI law, existing regulators
+            doing the work.</strong></p>
+
+        <p>MeitY's India AI Governance Guidelines, released under the IndiaAI Mission in November 2025 and foregrounded
+          at the India AI Impact Summit in New Delhi on 19–20 February 2026, are voluntary and principles-based,
+          anchored in seven <em>sutras</em> — trust, people-first governance, innovation over restraint, fairness and
+          equity, accountability, understandability by design, and safety/resilience/sustainability. IT Secretary S.
+          Krishnan framed the choice plainly at launch: India would encourage innovation and study global approaches
+          rather than lead with regulation.</p>
+
+        <p>The infrastructure side has moved faster than most people outside the ecosystem realise. Per MeitY and
+          IndiaAI figures: over 38,000 GPUs onboarded through a subsidised national compute facility, AIKosh hosting
+          more than 9,500 datasets and 273 sectoral models, 40+ petaflop systems under the National Supercomputing
+          Mission, and 570 AI data labs plus 27 IndiaAI labs across states.</p>
+
+        <h3>For anyone in Indian financial services: The RBI FREE-AI framework</h3>
+
+        <p>The RBI's FREE-AI framework (Framework for Responsible and Ethical Enablement of AI) is the document that
+          actually binds behaviour in BFSI. It sets out seven sutras, six pillars — infrastructure, policy, capacity,
+          governance, protection, assurance — and 26 recommendations, covering AI innovation sandboxes, indigenous
+          financial AI models, audit trails, and incident reporting.</p>
+
+        <p>Two figures from the RBI's own survey of regulated entities are worth sitting with: around <strong>20.8% have
+            AI in production</strong>, while <strong>67% want to explore AI use cases</strong>. Deployment is
+          concentrated in customer support, sales, credit underwriting and cybersecurity. The gap between those two
+          numbers is the entire competitive opportunity in Indian BFSI over the next 24 months — and it closes on
+          governance capability, not on model access. Third-party and off-the-shelf AI is explicitly in scope, which
+          means vendor due diligence, documented model logic, ongoing bias monitoring and human override paths are now
+          table stakes rather than nice-to-haves.</p>
+
+        <p>A finance ministry review with the RBI, MeitY and bank chiefs on systemic AI risk in the financial sector,
+          held on 23 April 2026, signalled the direction of travel: less "should we adopt", more "prove you can govern
+          it".</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <h2>7. AI impact on jobs 2026 data is more specific than the headlines</h2>
+
+        <p>The public argument runs between two positions that can't both be true — mass white-collar unemployment is
+          already here, or nothing has changed. The labour data supports neither.</p>
+
+        <p>What the evidence through mid-2026 actually suggests:</p>
+
+        <ul>
+          <li>There's <strong>no detectable rise in aggregate unemployment</strong> specifically among AI-exposed
+            workers.</li>
+          <li>There <em>is</em> a measurable narrowing at the entry point — the junior analyst, first-year associate,
+            entry-level developer roles that people historically used to climb onto the ladder.</li>
+          <li>Exposure skews toward <strong>higher-paid, more-educated</strong> work, not lower-paid work. This is the
+            opposite of the previous automation wave.</li>
+          <li>Most announced headcount reductions are <strong>anticipatory</strong>. A Harvard Business Review survey of
+            1,006 executives found only about 2% reported large reductions tied to actual AI implementation, while many
+            more reported cuts or hiring slowdowns based on expected future impact.</li>
+        </ul>
+
+        <p>That last point deserves more scepticism than it gets. "We're restructuring because of AI" has become a
+          convenient frame for cost decisions that would have happened anyway in a high-rate environment. And there's
+          counter-evidence: some firms report significantly <em>expanding</em> entry-level intake precisely because AI
+          tooling makes juniors productive faster.</p>
+
+        <p>Forecasts range from "10–15% of jobs eliminated by 2031" (BCG) to considerably more alarming numbers from
+          individual executives. Those are forecasts, not findings. Treat them accordingly.</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <h2>8. The new failure mode: security</h2>
+
+        <p>One story from late July deserves more attention than it got. An autonomous agent, driven by a combination of
+          frontier models, ran an end-to-end intrusion against Hugging Face's platform over roughly two and a half days.
+          Not a jailbreak demo. An actual multi-day operation.</p>
+
+        <p>This is the direction risk is heading. Capable agents with tool access are, structurally, capable attackers
+          with tool access. Meanwhile discovery motions and data breaches keep prying open the training-data question,
+          and the industry's old scrape-first-litigate-later posture is meeting sustained resistance across every
+          creative domain.</p>
+
+        <p>If your AI governance conversation is still mostly about hallucinations, it's about 18 months behind.</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <h2>AI industry news 2026: What I'd actually do about all this</h2>
+
+        <p>Five things, in rough order of how much money they'll save you:</p>
+
+        <ol>
+          <li><strong>Re-run your model evaluation.</strong> If your stack was chosen more than two quarters ago, you're
+            probably overpaying. Route by task complexity rather than defaulting everything to a frontier model.</li>
+          <li><strong>Design the workflow before the agent.</strong> Every credible piece of 2026 failure analysis
+            points here. Name an owner with budget authority before the second pilot.</li>
+          <li><strong>Treat evaluation coverage as the release gate.</strong> It's the metric that predicts survival,
+            and almost nobody instruments it properly.</li>
+          <li><strong>Get your compliance calendar right.</strong> For EU exposure: 2 August 2026 for transparency, 2
+            December 2026 for legacy content marking, 2 December 2027 for high-risk. For Indian BFSI: build the FREE-AI
+            governance scaffolding now, including for vendor AI.</li>
+          <li><strong>Assume your data is the bottleneck.</strong> It almost always is, and no model release fixes it.
+          </li>
+        </ol>
+
+        <p>The industry narrative in 2026 is about trillion-dollar valuations and parameter counts. The actual work is
+          scoping, data, and governance. That mismatch is exactly where the opportunity sits.</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <h2>Frequently asked questions</h2>
+
+        <p><strong>What is the biggest change in the AI industry in 2026?</strong><br>
+          Cost and competition. Capable models got dramatically cheaper — largely because of open-weight releases like
+          DeepSeek V4 and Kimi K3 — while the frontier expanded from two credible labs to five or six. Capability gains
+          continued, but the commercial shift was price.</p>
+
+        <p><strong>Is the AI industry in a bubble?</strong><br>
+          Capex is real and demand is supply-constrained, which argues against a pure bubble. But hyperscaler spending
+          has outrun operating cash flow, several hundred billion in data centre leases sit off balance sheet, and
+          multiple trillion-dollar IPOs are queued for the same window. The cycle shows characteristics of both the
+          fibre-optic bust and the cloud buildout. Nobody knows yet, and confident answers in either direction should be
+          discounted.</p>
+
+        <p><strong>Are AI agents working in enterprises?</strong><br>
+          Enterprise AI adoption is near-universal; value capture isn't. Around 80% of enterprises report at least one
+          production
+          application with an embedded agent, but only about 41% of rollouts reach positive ROI within twelve months,
+          and Gartner expects over 40% of agentic projects to be cancelled by end-2027. The differentiators are data
+          quality and governance, not model choice.</p>
+
+        <p><strong>Does India have an AI law?</strong><br>
+          Not a dedicated horizontal one. India's approach, set out in MeitY's India AI Governance Guidelines under the
+          IndiaAI Mission, is voluntary and principles-based, with sectoral regulators — RBI, SEBI, TRAI — applying the
+          principles within their own domains. The binding pressure in financial services comes through the RBI's
+          FREE-AI framework and DPDP privacy rules rather than an AI Act.</p>
+
+        <p><strong>What changes in the EU on the EU AI Act August 2026 deadline?</strong><br>
+          The AI Act's Article 50 transparency obligations apply, including machine-readable marking of AI-generated
+          content. Systems already on the market before that date get until 2 December 2026. High-risk obligations for
+          standalone Annex III systems were deferred to 2 December 2027 under the Digital Omnibus on AI.</p>
+
+        <p><strong>Is AI taking jobs in 2026?</strong><br>
+          Not in aggregate, not yet. The measurable effect so far is narrower and more specific: the entry-level rung of
+          exposed knowledge occupations is getting harder to climb onto, and exposure skews toward higher-paid,
+          more-educated work. Most announced AI-linked headcount cuts appear anticipatory rather than tied to completed
+          implementations.</p>
+
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid var(--line);" />
+
+        <p style="font-size: 0.9em; color: var(--text-dim);"><em>A note on sources: figures in this piece come from
+            public reporting, regulatory documents (MeitY, RBI, the European Commission and Parliament), and analyst
+            research from Gartner, McKinsey, Forrester, BCG, PwC and Moody's, current as of 30 July 2026. Where
+            estimates differ meaningfully between sources — as with hyperscaler capex — ranges are given rather than a
+            single number. Valuation figures for privately held companies, including secondary-market pricing, are
+            estimates and not confirmed transactions. This article is informational and is not investment advice.</em>
+        </p>
+
+        <!-- Extended Author Bio for E-E-A-T -->
+        <div class="author-card">
+          <img src="../images/profile-2.png" alt="Mayur Kashyap" loading="lazy" />
+          <div class="author-card__content">
+            <div class="author-card__name">Mayur Kashyap</div>
+            <div class="author-card__bio">
+              Mayur is a Senior Software Engineer specializing in AI Product Engineering and production frontend systems. With 7+ years of experience building high-trust applications for the financial sector at Bajaj Capital, he writes about the intersection of artificial intelligence, UI/UX, and enterprise reality.
+            </div>
+            <div class="author-card__socials mono">
+              <a href="https://x.com/KashyapMayur" target="_blank" rel="noopener noreferrer">X (TWITTER) ↗</a>
+              <a href="https://www.linkedin.com/in/mayur-kashyap/" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <footer class="article-footer">
+        <a href="blog.html" class="back-link mono">
+          <span aria-hidden="true">←</span> BACK TO ARTICLES
+        </a>
+      </footer>
+    </div>
+  </main>
+
+  <footer class="footer" id="footer" style="margin-top: 0;">
+    <div class="footer__wordmark" aria-hidden="true">
+      <span>M</span><span>A</span><span>Y</span><span>U</span><span>R</span>
+      <span class="footer__space"></span>
+      <span>K</span><span>A</span><span>S</span><span>H</span><span>Y</span><span>A</span><span>P</span>
+    </div>
+
+    <div class="container footer__grid">
+      <div class="footer__links mono">
+        <a href="https://github.com/mayurkashyap60" target="_blank" rel="noopener">GITHUB ↗</a>
+        <a href="https://linkedin.com/in/mayur-kashyap" target="_blank" rel="noopener">LINKEDIN ↗</a>
+        <a href="mailto:mayurkashyap60@gmail.com">EMAIL ↗</a>
+      </div>
+      <div class="footer__meta mono">
+        <span>© 2026 MAYUR KASHYAP</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/gsap/gsap.min.js"></script>
+  <script src="../js/gsap/SplitText.min.js"></script>
+  <script src="../js/lenis/lenis.min.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>
