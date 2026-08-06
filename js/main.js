@@ -6,37 +6,137 @@
 (() => {
   "use strict";
 
+  /* ═══════════════════════════════════════════════════════════
+     0 · FAILURE ISOLATION
+     Every module below runs inside safe(). Previously this file was one
+     unbroken IIFE: a single throw anywhere (a missing plugin, a Safari-only
+     RangeError, a null node) killed EVERY line after it. That is the single
+     biggest reason a page "works on Android but is dead on iPhone" — Safari
+     throws on something Chrome tolerates, and the whole script stops.
+     ═══════════════════════════════════════════════════════════ */
+  const safe = (label, fn) => {
+    try { return fn(); }
+    catch (err) { console.warn("[main.js] module failed:", label, err); return undefined; }
+  };
+
   // gates pre-hidden CSS states (hero reveal lines) — without JS, all content renders
   document.body.classList.add("js-anim");
 
-  const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const TOUCH = window.matchMedia("(hover: none), (pointer: coarse)").matches;
-
-  if (REDUCED) document.body.classList.add("no-motion");
-
-  gsap.registerPlugin(ScrollTrigger, SplitText);
-
-  /* ─────────────── LENIS SMOOTH SCROLL ─────────────── */
-  let lenis = null;
-  if (!REDUCED) {
-    lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1, smoothWheel: true });
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((t) => lenis.raf(t * 1000));
-    gsap.ticker.lagSmoothing(0);
-  }
-
-  const scrollToTarget = (target) => {
-    if (lenis) lenis.scrollTo(target, { offset: 0, duration: 1.4 });
-    else document.querySelector(target)?.scrollIntoView({ behavior: "auto" });
+  /* ─────────────── ENVIRONMENT ───────────────
+     matchMedia is wrapped: Safari throws on a malformed/unsupported query
+     string rather than returning matches:false. */
+  const mq = (q) => {
+    try { return window.matchMedia(q).matches; } catch (e) { return false; }
   };
 
+  const REDUCED = mq("(prefers-reduced-motion: reduce)");
+  const TOUCH = mq("(hover: none)") || mq("(pointer: coarse)") || "ontouchstart" in window;
+
+  /* iOS / iPadOS detection. iPadOS 13+ reports itself as "Macintosh", so the
+     maxTouchPoints check is required — without it iPads fall through to the
+     desktop path and hit every bug below. */
+  const IOS =
+    /iP(hone|od|ad)/.test(navigator.platform || "") ||
+    /iPad|iPhone|iPod/.test(navigator.userAgent || "") ||
+    (navigator.userAgent.includes("Macintosh") && (navigator.maxTouchPoints || 0) > 1);
+
+  // any WebKit-on-Apple engine, incl. Chrome/Firefox on iOS (all use WebKit)
+  const SAFARI = IOS || (/^((?!chrome|android).)*safari/i.test(navigator.userAgent || ""));
+
+  if (REDUCED) document.body.classList.add("no-motion");
+  if (IOS) document.body.classList.add("is-ios");
+
+  /* Real viewport height for iOS. Safari's 100vh includes the collapsing
+     address bar, so full-height sections overflow and anything positioned
+     against the bottom sits under the toolbar. Use var(--vh, 1vh) * 100 in CSS. */
+  safe("vh-unit", () => {
+    const setVH = () => {
+      const h = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+      document.documentElement.style.setProperty("--vh", h * 0.01 + "px");
+    };
+    setVH();
+    window.addEventListener("orientationchange", () => setTimeout(setVH, 260));
+    if (window.visualViewport) window.visualViewport.addEventListener("resize", setVH);
+  });
+
+  /* ─────────────── PLUGIN REGISTRATION ───────────────
+     SplitText is a Club GSAP plugin. If the <script> for it 404s or is blocked,
+     the bare identifier `SplitText` is a ReferenceError that used to abort the
+     whole file on the very first statement. Now each plugin is probed
+     independently and the page degrades to "no text-split" instead of "no JS". */
+  const HAS_GSAP = typeof gsap !== "undefined";
+  if (!HAS_GSAP) {
+    console.warn("[main.js] GSAP missing — revealing all content as static.");
+    document.body.classList.remove("js-anim");
+    document.body.classList.add("no-motion");
+    return;
+  }
+
+  const HAS_ST = typeof ScrollTrigger !== "undefined";
+  const HAS_SPLIT = typeof SplitText !== "undefined";
+  const HAS_LENIS = typeof Lenis !== "undefined";
+
+  safe("registerPlugin", () => {
+    const plugins = [];
+    if (HAS_ST) plugins.push(ScrollTrigger);
+    if (HAS_SPLIT) plugins.push(SplitText);
+    if (plugins.length) gsap.registerPlugin.apply(gsap, plugins);
+  });
+
+  /* iOS address-bar behaviour is the classic ScrollTrigger killer: scrolling
+     collapses the toolbar, which fires `resize`, which makes ScrollTrigger
+     recalculate mid-scroll — triggers then fire at the wrong offsets or never
+     fire. ignoreMobileResize is the canonical fix; dropping `resize` from
+     autoRefreshEvents stops the same loop on orientation micro-changes. */
+  safe("st-config", () => {
+    if (!HAS_ST) return;
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+    });
+  });
+
+  /* ─────────────── LENIS SMOOTH SCROLL ───────────────
+     Lenis is now DESKTOP-ONLY. On iOS its default touch mode leaves the page
+     scrolling natively while Lenis keeps reporting its own internal scroll
+     value — so `lenis.on("scroll", ScrollTrigger.update)` fed ScrollTrigger a
+     position that did not match the real one, and scroll-driven animations
+     silently never fired. Native scroll + a native ScrollTrigger listener is
+     both correct and smoother on a phone. */
+  let lenis = null;
+  const USE_LENIS = HAS_LENIS && !REDUCED && !TOUCH && !IOS;
+
+  safe("lenis", () => {
+    if (USE_LENIS) {
+      lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1, smoothWheel: true, smoothTouch: false });
+      if (HAS_ST) lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add((t) => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } else if (HAS_ST) {
+      // native scroll path — keep ScrollTrigger in sync without Lenis
+      window.addEventListener("scroll", ScrollTrigger.update, { passive: true });
+      // leave lagSmoothing ON: iOS backgrounds rAF aggressively, and disabling
+      // it makes tweens leap forward when the tab or app is resumed
+    }
+  });
+
+  const scrollToTarget = (target) => safe("scrollTo", () => {
+    const el = typeof target === "string" ? document.querySelector(target) : target;
+    if (lenis) { lenis.scrollTo(el || target, { offset: 0, duration: 1.4 }); return; }
+    if (!el) return;
+    // iOS Safari supports smooth behaviour from 15.4; the try/catch covers older
+    try { el.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" }); }
+    catch (e) { el.scrollIntoView(); }
+  });
+
   /* ─────────────── HEADER SCROLL STATE ─────────────── */
-  {
+  safe("header", () => {
     const header = document.querySelector(".header");
+    if (!header) return;   // was an unguarded throw that aborted the whole file
     const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-  }
+  });
 
   /* ─────────────── REVEAL-ON-VIEW SYSTEM ───────────────
      All entrance animations run through IntersectionObserver. Content is
@@ -46,18 +146,52 @@
      observer ever fail, the worst case is "no animation" — never
      "invisible content" or stuck half-states. */
   const revealMap = new Map();
+
+  const runReveal = (el) => {
+    const fn = revealMap.get(el);
+    if (!fn) return;
+    revealMap.delete(el);
+    if (io) { try { io.unobserve(el); } catch (e) { } }
+    safe("reveal", fn);
+  };
+
   const io = (!REDUCED && "IntersectionObserver" in window)
     ? new IntersectionObserver((entries) => {
       entries.forEach((en) => {
-        if (!en.isIntersecting) return;
-        io.unobserve(en.target);
-        const fn = revealMap.get(en.target);
-        revealMap.delete(en.target);
-        if (fn) fn();
+        // isIntersecting alone is unreliable on iOS during momentum scroll —
+        // a fast flick can deliver an entry with a real ratio but the flag
+        // already flipped back. Accept either signal.
+        if (!en.isIntersecting && !(en.intersectionRatio > 0)) return;
+        runReveal(en.target);
       });
-    }, { rootMargin: "0px 0px -8% 0px" })
+    }, { rootMargin: "0px 0px -8% 0px", threshold: [0, 0.01] })
     : null;
-  const onReveal = (el, fn) => { if (el && io) { revealMap.set(el, fn); io.observe(el); } };
+
+  const onReveal = (el, fn) => {
+    if (!el) return;
+    if (!io) { safe("reveal-direct", fn); return; }   // no observer → show immediately
+    revealMap.set(el, fn);
+    try { io.observe(el); } catch (e) { safe("reveal-direct", fn); }
+  };
+
+  /* WATCHDOG — the guarantee that no iPhone ever sees an empty section.
+     iOS Safari drops IntersectionObserver callbacks in two known situations:
+     the observer is created before layout settles, and observed nodes whose
+     height is still 0 because images have not decoded. Anything above the fold
+     that has not fired by these checkpoints is flushed manually. */
+  safe("reveal-watchdog", () => {
+    const flushVisible = () => {
+      [...revealMap.keys()].forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        if (r.top < vh * 0.95 && r.bottom > 0) runReveal(el);
+      });
+    };
+    window.addEventListener("load", () => setTimeout(flushVisible, 200));
+    window.addEventListener("orientationchange", () => setTimeout(flushVisible, 400));
+    setTimeout(flushVisible, 1200);
+    setTimeout(flushVisible, 3000);
+  });
 
   /* stagger a group into view; CSS transitions are suspended for the tween
      so hover transitions can't fight GSAP's frames, then every inline prop
@@ -78,7 +212,8 @@
   };
 
   /* ─────────────── MAGNETIC ELEMENTS ─────────────── */
-  if (!TOUCH && !REDUCED) {
+  safe("magnetic", () => {
+    if (TOUCH || IOS || REDUCED) return;   // iOS fires synthetic mousemove on tap
     document.querySelectorAll(".magnetic").forEach((el) => {
       const strength = 0.35;
       const xTo = gsap.quickTo(el, "x", { duration: 0.4, ease: "power3" });
@@ -90,7 +225,7 @@
       });
       el.addEventListener("mouseleave", () => { xTo(0); yTo(0); });
     });
-  }
+  });
 
   /* ─────────────── SPLIT HEADINGS ───────────────
      Splitting waits for document.fonts.ready so line breaks are measured
@@ -100,14 +235,27 @@
   let heroIntroRequested = false;
   let heroRevealed = false;
 
+  /* Blur is disabled on every WebKit engine. Two hard iOS bugs:
+     1. A CSS filter on an element using background-clip:text +
+        -webkit-text-fill-color:transparent (the .hero__em gradient words)
+        renders it PERMANENTLY INVISIBLE on iOS — the gradient text simply
+        never appears, which reads as "the animation didn't run".
+     2. Animating filter across 100+ split chars forces a separate compositing
+        layer per char; iOS hits its layer budget and abandons the paint, so
+        chars stay at opacity 0. */
+  const USE_BLUR = !SAFARI && !IOS;
+
   const revealHeading = (entry) => {
-    gsap.to(entry.targets, {
-      yPercent: 0, opacity: 1, filter: "blur(0px)",
+    if (!entry || !entry.targets || !entry.targets.length) return;
+    const to = {
+      yPercent: 0, opacity: 1,
       duration: 0.9, ease: "power4.out",
       stagger: { each: 0.016, from: "start" },
-      // drop the leftover blur filter so chars don't hold a stacking context
+      // always clear: a stuck filter/will-change holds a stacking context
       onComplete: () => gsap.set(entry.targets, { clearProps: "filter,willChange" }),
-    });
+    };
+    if (USE_BLUR) to.filter = "blur(0px)";
+    gsap.to(entry.targets, to);
   };
 
   const revealHero = () => {
@@ -115,19 +263,44 @@
     if (h && !heroRevealed) { heroRevealed = true; revealHeading(h); }
   };
 
-  if (!REDUCED && io) {
+  if (!REDUCED && io && HAS_SPLIT) {
     /* With no loader curtain to hide behind, the hero headline would paint
        unsplit, then get hidden by the split, then animate in — a visible
        flash. Hide it until the split exists. The class is added ONLY on the
        path that is guaranteed to remove it below, so it can never stick. */
     document.body.classList.add("split-pending");
 
-    // don't hold headings hostage if webfonts stall — 2.5s ceiling
+    /* ABSOLUTE FAILSAFE — split-pending hides the hero headline. Previously it
+       was only removed inside a .then(), so if document.fonts was unavailable,
+       the promise never settled, or anything in that callback threw, the hero
+       text stayed invisible forever. On iPhone that looks exactly like "the JS
+       is dead". This timer is unconditional and independent of every promise. */
+    const releasePending = () => document.body.classList.remove("split-pending");
+    setTimeout(releasePending, 3000);
+
+    /* don't hold headings hostage if webfonts stall — 1.8s ceiling.
+       document.fonts is guarded: accessing .ready throws on some older WebKit
+       builds, and an unhandled throw here used to abort the entire script. */
     const fontsReady = Promise.race([
-      document.fonts.ready,
-      new Promise((r) => setTimeout(r, 2500)),
+      new Promise((resolve) => {
+        try {
+          if (document.fonts && document.fonts.ready) document.fonts.ready.then(resolve, resolve);
+          else resolve();
+        } catch (e) { resolve(); }
+      }),
+      new Promise((r) => setTimeout(r, 1800)),
     ]);
-    fontsReady.then(() => {
+
+    /* Two extra frames after fonts.ready. iOS Safari resolves fonts.ready
+       BEFORE the new metrics are applied to laid-out text, so SplitText would
+       measure line breaks against the fallback font. The .split-line wrappers
+       (overflow:hidden) then clip against stale positions — the classic
+       "hero heading has missing or cut-off letters on iPhone only". */
+    const settled = fontsReady.then(() => new Promise((r) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => r()));
+    }));
+
+    settled.then(() => {
       document.querySelectorAll("[data-split]").forEach((el) => {
         try {
           const split = new SplitText(el, {
@@ -139,15 +312,21 @@
             ignore: ".hero__em",
           });
           // animate ignored gradient words as single units alongside the chars
-          const targets = [...split.chars, ...el.querySelectorAll(".hero__em")];
-          gsap.set(targets, { yPercent: 110, opacity: 0, filter: "blur(6px)" });
+          const targets = [
+            ...(split.chars || []),
+            ...el.querySelectorAll(".hero__em"),
+          ];
+          if (!targets.length) return;
+          const from = { yPercent: 110, opacity: 0 };
+          if (USE_BLUR) from.filter = "blur(6px)";
+          gsap.set(targets, from);
           splitHeadings.push({ el, split, targets });
         } catch (e) { /* fall through — heading shows unsplit */ }
       });
 
       /* unconditional: if the split succeeded the chars carry their own hidden
          state, and if it threw the heading simply shows as plain text */
-      document.body.classList.remove("split-pending");
+      releasePending();
 
       if (heroIntroRequested) revealHero();
 
@@ -155,8 +334,34 @@
         if (entry.el.classList.contains("hero__title")) return;
         onReveal(entry.el, () => revealHeading(entry));
       });
-      ScrollTrigger.refresh();
+      if (HAS_ST) ScrollTrigger.refresh();
+
+      /* iOS re-flows headline line breaks on rotation, but the .split-line
+         wrappers keep their old widths and clip the text. Re-split on rotate. */
+      let rotateTimer;
+      window.addEventListener("orientationchange", () => {
+        clearTimeout(rotateTimer);
+        rotateTimer = setTimeout(() => safe("re-split", () => {
+          splitHeadings.forEach((entry) => {
+            if (!entry.split || typeof entry.split.split !== "function") return;
+            gsap.set(entry.targets, { clearProps: "all" });
+            entry.split.split({ type: "lines,chars", linesClass: "split-line", charsClass: "split-char", ignore: ".hero__em" });
+            entry.targets = [...(entry.split.chars || []), ...entry.el.querySelectorAll(".hero__em")];
+            gsap.set(entry.targets, { clearProps: "all", opacity: 1, yPercent: 0 });
+          });
+          if (HAS_ST) ScrollTrigger.refresh();
+        }), 300);
+      });
+    }).catch(() => {
+      // a rejection here must never leave the headline hidden
+      releasePending();
+      document.querySelectorAll("[data-split]").forEach((el) => {
+        gsap.set(el, { clearProps: "all", opacity: 1 });
+      });
     });
+  } else {
+    // no split path at all (reduced motion, no observer, or plugin absent)
+    document.body.classList.remove("split-pending");
   }
 
   /* ─────────────── HERO INTRO ───────────────
@@ -167,10 +372,13 @@
     // headline chars + kicker/sub/cta lines
     heroIntroRequested = true;
     revealHero();
-    gsap.to("#hero .reveal-line", {
-      opacity: 1, y: 0, duration: 1, ease: "power3.out",
-      stagger: 0.12, delay: REDUCED ? 0 : 0.15,
-    });
+    if (document.querySelector("#hero .reveal-line")) {
+      gsap.to("#hero .reveal-line", {
+        opacity: 1, y: 0, duration: 1, ease: "power3.out",
+        stagger: 0.12, delay: REDUCED ? 0 : 0.15,
+        clearProps: "willChange",
+      });
+    }
   };
 
   if (REDUCED) {
@@ -178,68 +386,148 @@
       el.style.opacity = 1; el.style.transform = "none";
     });
   }
-  introHero();
+  safe("introHero", introHero);
+
+  /* Hard guarantee: if anything above failed, the hero must still be readable.
+     A blank hero is the worst possible failure mode and was previously
+     reachable on iOS. */
+  setTimeout(() => safe("hero-failsafe", () => {
+    document.body.classList.remove("split-pending");
+    document.querySelectorAll("#hero .reveal-line").forEach((el) => {
+      if (parseFloat(getComputedStyle(el).opacity) < 0.05) {
+        el.style.opacity = 1; el.style.transform = "none";
+      }
+    });
+  }), 3200);
 
   /* ─────────────── HERO VIDEO ───────────────
      The markup already declares autoplay+muted+playsinline, but some browsers
      still refuse (Safari Low Power Mode, data-saver). Nudge it, and if the
      nudge is rejected leave the poster frame showing rather than a blank box. */
-  (() => {
+  safe("hero-video", () => {
     const video = document.querySelector(".hero__video");
     if (!video) return;
-    const nudge = () => video.play().catch(() => { });
-    nudge();
-    video.addEventListener("loadeddata", nudge, { once: true });
-    // last resort: the first user gesture anywhere satisfies every autoplay policy
-    document.addEventListener("pointerdown", nudge, { once: true });
-  })();
 
-  /* ─────────────── ANCHOR CLICKS THROUGH LENIS ─────────────── */
-  document.querySelectorAll('a[href^="#"]').forEach((a) => {
-    a.addEventListener("click", (e) => {
-      const target = a.getAttribute("href");
-      if (target.length > 1 && document.querySelector(target)) {
-        e.preventDefault(); scrollToTarget(target);
-      }
+    /* iOS refuses inline autoplay unless ALL of these are true, and it checks
+       the live DOM properties, not just the original attributes — a framework
+       re-render or an extension can strip them. Re-assert them here. */
+    video.muted = true;                                    // property, not just attribute
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");           // older iOS
+    video.setAttribute("preload", video.getAttribute("preload") || "metadata");
+
+    let done = false;
+    const nudge = () => {
+      if (done) return;
+      const p = video.play();
+      // older WebKit returns undefined instead of a promise — .catch would throw
+      if (p && typeof p.then === "function") {
+        p.then(() => { done = true; }).catch(() => { });
+      } else { done = true; }
+    };
+
+    nudge();
+    // iOS commonly fires only some of these depending on network and Low Power
+    ["loadeddata", "loadedmetadata", "canplay", "canplaythrough"].forEach((ev) =>
+      video.addEventListener(ev, nudge, { once: true }));
+
+    /* Last resort: the first real user gesture satisfies every autoplay policy.
+       pointerdown alone is not enough on iOS — Safari suppresses pointer events
+       in some scroll contexts, so touchstart/touchend/click are all bound. */
+    ["touchstart", "touchend", "pointerdown", "click"].forEach((ev) =>
+      document.addEventListener(ev, nudge, { once: true, passive: true }));
+
+    // Low Power Mode pauses the video on resume; restart when the tab returns
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && video.paused) { done = false; nudge(); }
     });
   });
 
-  /* ─────────────── SCROLL-POSITION EFFECTS (scrub — self-correcting) ─────────────── */
-  if (!REDUCED) {
+  /* ─────────────── ANCHOR CLICKS THROUGH LENIS ─────────────── */
+  safe("anchors", () => {
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const target = a.getAttribute("href");
+        if (!target || target.length <= 1) return;
+        let node = null;
+        try { node = document.querySelector(target); } catch (err) { return; }
+        if (node) { e.preventDefault(); scrollToTarget(target); }
+      });
+    });
+  });
+
+  /* ─────────────── SCROLL-POSITION EFFECTS (scrub — self-correcting) ───────────────
+     Skipped on iOS: a scrubbed backgroundColor tween on <body> repaints the
+     full-viewport background on every scroll frame, which is the heaviest thing
+     you can ask WebKit to do while it is also running momentum scroll. On
+     iPhone it drops the whole scroll thread and everything looks broken. */
+  safe("scroll-fx", () => {
+    if (REDUCED || !HAS_ST || IOS) return;
+    if (!document.querySelector("#work")) return;
     // subtle page "breathing" — bg shifts slightly warmer as you descend
     gsap.to("body", {
       backgroundColor: "#08070c",
       scrollTrigger: { trigger: "#work", start: "top bottom", end: "bottom top", scrub: true },
     });
-  }
+  });
 
   /* ─────────────── ENTRANCES (observer-driven, fail-safe) ─────────────── */
-  // portrait mask reveal
-  onReveal(document.querySelector(".about__portrait"), () => {
-    gsap.fromTo(".mask-reveal",
-      { clipPath: "inset(0 0 100% 0)" },
-      { clipPath: "inset(0 0 0% 0)", duration: 1.2, ease: "power4.inOut", clearProps: "clipPath" });
+  /* portrait mask reveal.
+     iOS still needs -webkit-clip-path: unprefixed clip-path with inset() is
+     supported, but WebKit ignores it on an element that also has a transform or
+     border-radius unless the prefixed property is present. Without it the mask
+     never opens and the portrait stays fully hidden on iPhone. Both properties
+     are animated together, and both are cleared on completion. */
+  safe("portrait-mask", () => {
+    const portrait = document.querySelector(".about__portrait");
+    const mask = document.querySelector(".mask-reveal");
+    if (!portrait || !mask) return;
+
+    onReveal(portrait, () => {
+      const closed = "inset(0 0 100% 0)";
+      const open = "inset(0 0 0% 0)";
+      gsap.fromTo(mask,
+        { clipPath: closed, webkitClipPath: closed },
+        {
+          clipPath: open, webkitClipPath: open,
+          duration: 1.2, ease: "power4.inOut",
+          clearProps: "clipPath,webkitClipPath",
+          // if WebKit refuses the property entirely, force it visible
+          onComplete: () => { mask.style.clipPath = ""; mask.style.webkitClipPath = ""; },
+        });
+    });
   });
 
   // stat strip + blog cards
-  enterStagger(document.querySelector(".stats"), ".stats__item");
-  enterStagger(document.querySelector(".blog__grid"), ".bcard");
+  safe("stagger-groups", () => {
+    enterStagger(document.querySelector(".stats"), ".stats__item");
+    enterStagger(document.querySelector(".blog__grid"), ".bcard");
+  });
 
   /* ─────────────── STAT COUNTERS ───────────────
      markup holds the final numbers, so no-JS / reduced-motion show them as-is */
-  document.querySelectorAll("[data-counter]").forEach((el) => {
-    const target = +el.dataset.counter;
-    onReveal(el, () => {
-      const obj = { v: 0 };
-      gsap.to(obj, {
-        v: target, duration: 1.6, ease: "power2.out",
-        onUpdate: () => { el.textContent = Math.round(obj.v); },
+  safe("counters", () => {
+    document.querySelectorAll("[data-counter]").forEach((el) => {
+      const target = parseFloat(el.dataset.counter);
+      // guard: a non-numeric attribute used to write "NaN" into the DOM
+      if (!isFinite(target)) return;
+      const final = String(Math.round(target));
+      onReveal(el, () => {
+        const obj = { v: 0 };
+        gsap.to(obj, {
+          v: target, duration: 1.6, ease: "power2.out",
+          onUpdate: () => { el.textContent = Math.round(obj.v); },
+          onComplete: () => { el.textContent = final; },   // exact landing value
+        });
       });
     });
   });
 
   /* ─────────────── EXPERIENCE — CAREER INDEX ─────────────── */
-  enterStagger(document.getElementById("xpIndex"), ".xpi__row");
+  safe("xp-index", () => enterStagger(document.getElementById("xpIndex"), ".xpi__row"));
 
   /* ─────────────── BRAND MARQUEES ───────────────
      The scroll itself is a pure CSS keyframe (see .marquee__track). All this
@@ -250,7 +538,7 @@
      runs before the images have decoded, so the distance was wrong and the
      loop showed a gap — and it never recomputed on resize. A percentage-based
      keyframe needs no measurement at all, so there is nothing to get stale. */
-  (() => {
+  safe("marquee", () => {
     const rows = document.querySelectorAll("[data-brands]");
     if (!rows.length) return;
 
@@ -268,9 +556,20 @@
         .join("");
       // exactly two halves — the keyframe translates by precisely one of them
       track.innerHTML = half(false) + half(true);
+
+      /* iOS will not promote a CSS-keyframed track to its own layer on its own
+         when the track holds 60 <img> children — the animation then runs on the
+         main thread and stutters or stalls completely during scroll. These two
+         hints force a compositing layer. */
+      if (IOS) {
+        track.style.willChange = "transform";
+        track.style.transform = "translate3d(0,0,0)";
+        track.style.backfaceVisibility = "hidden";
+      }
+
       if (!REDUCED) track.classList.add("is-ready");
     });
-  })();
+  });
 
   /* ─────────────── WORK — PROJECT INDEX + CASE DRAWER ───────────────
      One data source drives three surfaces: the row list, the visual that
@@ -278,7 +577,7 @@
      `link` is deliberately absent on the internal Bajaj Capital builds —
      there is no public URL, so the CTA falls back to the contact anchor
      rather than inventing one. */
-  (() => {
+  safe("work", () => {
     /* ── SHOTS ──
        Placeholder screenshots so the carousel has something to move. Replace
        these paths with real captures — any count works, the UI adapts, and a
@@ -505,7 +804,7 @@
     };
 
     const shotsGo = (to, animate = true) => {
-      if (!shots.n) return;
+      if (!shots.n || !shots.track) return;
       // wrap both ways so prev from the first lands on the last
       shots.i = ((to % shots.n) + shots.n) % shots.n;
 
@@ -521,15 +820,20 @@
         gsap.set(shots.track, { xPercent: x, overwrite: true });
       }
 
-      [...shots.dots.children].forEach((d, k) => {
-        d.classList.toggle("is-active", k === shots.i);
-        d.setAttribute("aria-current", k === shots.i ? "true" : "false");
-      });
-      shots.count.textContent =
-        String(shots.i + 1).padStart(2, "0") + " / " + String(shots.n).padStart(2, "0");
+      if (shots.dots) {
+        [...shots.dots.children].forEach((d, k) => {
+          d.classList.toggle("is-active", k === shots.i);
+          d.setAttribute("aria-current", k === shots.i ? "true" : "false");
+        });
+      }
+      if (shots.count) {
+        shots.count.textContent =
+          String(shots.i + 1).padStart(2, "0") + " / " + String(shots.n).padStart(2, "0");
+      }
     };
 
     const shotsBuild = (list) => {
+      if (!shots.track) return;
       const imgs = Array.isArray(list) ? list : [];
       shots.n = imgs.length;
       // eager, not lazy: slides are created at open time and moved by transform,
@@ -539,49 +843,116 @@
           `<img src="${src}" alt="Screen ${k + 1} of ${imgs.length}" ` +
           `decoding="async"${k ? ' fetchpriority="low"' : ""} /></div>`)
         .join("");
-      shots.dots.innerHTML = imgs
-        .map((_, k) => `<button class="shots__dot" type="button" ` +
-          `aria-label="Go to image ${k + 1}"></button>`)
-        .join("");
-      shots.root.classList.toggle("is-single", shots.n <= 1);
+      if (shots.dots) {
+        shots.dots.innerHTML = imgs
+          .map((_, k) => `<button class="shots__dot" type="button" ` +
+            `aria-label="Go to image ${k + 1}"></button>`)
+          .join("");
+      }
+      if (shots.root) shots.root.classList.toggle("is-single", shots.n <= 1);
       gsap.killTweensOf(shots.track);
       shotsGo(0, false);
     };
 
-    shots.prev.addEventListener("click", () => shotsGo(shots.i - 1));
-    shots.next.addEventListener("click", () => shotsGo(shots.i + 1));
-    shots.dots.addEventListener("click", (e) => {
-      const dot = e.target.closest(".shots__dot");
-      if (dot) shotsGo([...shots.dots.children].indexOf(dot));
-    });
-
-    /* pointer swipe — only commits on a mostly-horizontal drag, so a vertical
-       flick still scrolls the drawer (see touch-action:pan-y on the viewport) */
-    if (!REDUCED) {
-      let sx = 0, sy = 0, down = false;
-      shots.viewport.addEventListener("pointerdown", (e) => {
-        down = true; sx = e.clientX; sy = e.clientY;
+    if (shots.prev) shots.prev.addEventListener("click", () => shotsGo(shots.i - 1));
+    if (shots.next) shots.next.addEventListener("click", () => shotsGo(shots.i + 1));
+    if (shots.dots) {
+      shots.dots.addEventListener("click", (e) => {
+        const dot = e.target.closest(".shots__dot");
+        if (dot) shotsGo([...shots.dots.children].indexOf(dot));
       });
-      shots.viewport.addEventListener("pointerup", (e) => {
+    }
+
+    /* ── SWIPE ──
+       Two changes that matter on iPhone:
+
+       1. No longer gated behind !REDUCED. Swiping is NAVIGATION, not decoration.
+          Reduce Motion is very commonly enabled on iOS (Settings › Accessibility
+          › Motion, and some users get it via other accessibility profiles), and
+          the old gate meant those users had a carousel they physically could not
+          operate — which reads as "the JS is broken on iPhone". Reduce Motion now
+          only removes the tween, not the ability to move.
+
+       2. Touch events as a fallback alongside Pointer Events. iOS supports
+          pointer events, but inside a scrollable modal with touch-action Safari
+          frequently never delivers pointerup — so the swipe was armed on
+          pointerdown and then silently dropped. touchend always arrives. */
+    if (shots.viewport) {
+      let sx = 0, sy = 0, down = false;
+
+      const start = (x, y) => { down = true; sx = x; sy = y; };
+      const end = (x, y) => {
         if (!down) return;
         down = false;
-        const dx = e.clientX - sx, dy = e.clientY - sy;
+        const dx = x - sx, dy = y - sy;
+        // commit only on a mostly-horizontal drag so a vertical flick still
+        // scrolls the drawer (see touch-action:pan-y on the viewport)
         if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
           shotsGo(shots.i + (dx < 0 ? 1 : -1));
         }
-      });
+      };
+
+      shots.viewport.addEventListener("pointerdown", (e) => start(e.clientX, e.clientY));
+      shots.viewport.addEventListener("pointerup", (e) => end(e.clientX, e.clientY));
       shots.viewport.addEventListener("pointercancel", () => { down = false; });
+
+      shots.viewport.addEventListener("touchstart", (e) => {
+        const t = e.touches[0]; if (t) start(t.clientX, t.clientY);
+      }, { passive: true });
+      shots.viewport.addEventListener("touchend", (e) => {
+        const t = e.changedTouches[0]; if (t) end(t.clientX, t.clientY);
+      }, { passive: true });
+      shots.viewport.addEventListener("touchcancel", () => { down = false; });
     }
 
     /* ── case drawer ── */
     const modal = document.getElementById("caseModal");
+    if (!modal) return;
     const panel = modal.querySelector(".modal__panel");
     const scroll = modal.querySelector(".modal__scroll");
     const link = document.getElementById("modalLink");
     const linkText = document.getElementById("modalLinkText");
+    if (!panel || !scroll) return;
     let lastFocus = null;
 
-    const set = (id, value) => { document.getElementById(id).textContent = value; };
+    // a missing element used to throw and abort the rest of the work module
+    const set = (id, value) => {
+      const node = document.getElementById(id);
+      if (node) node.textContent = value;
+    };
+
+    /* ── BODY SCROLL LOCK ──
+       lenis.stop() was the only lock, but Lenis is desktop-only now (and on iOS
+       it never controlled touch scrolling anyway). Without this, the page behind
+       the drawer scrolls under your finger on iPhone and the drawer feels
+       broken. position:fixed with a negative offset is the only approach WebKit
+       honours — overflow:hidden on body alone does nothing on iOS. */
+    let lockedY = 0;
+    const lockScroll = () => {
+      lockedY = window.scrollY || window.pageYOffset || 0;
+      if (IOS) {
+        document.body.style.position = "fixed";
+        document.body.style.top = -lockedY + "px";
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+        document.body.style.width = "100%";
+      }
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("is-locked");
+    };
+    const unlockScroll = () => {
+      if (IOS) {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.width = "";
+      }
+      document.body.style.overflow = "";
+      document.body.classList.remove("is-locked");
+      // restore instantly — 'auto' avoids a visible smooth-scroll jump back
+      window.scrollTo(0, lockedY);
+    };
 
     const open = (key) => {
       const p = byId(key);
@@ -597,7 +968,8 @@
       set("modalApproach", p.approach);                          // 7
       set("modalResult", p.result);                              // 8
 
-      if (p.link) {
+      if (!link) { /* CTA absent — skip link wiring */ }
+      else if (p.link) {
         link.href = p.link;
         link.target = "_blank";
         link.rel = "noopener";
@@ -615,11 +987,14 @@
       lastFocus = document.activeElement;
       modal.hidden = false;
       scroll.scrollTop = 0;
-      lenis?.stop();
+      if (lenis) lenis.stop();
+      lockScroll();
 
       if (!REDUCED) {
         gsap.fromTo(panel, { xPercent: 100 }, { xPercent: 0, duration: 0.72, ease: "expo.out" });
-        gsap.fromTo(".modal__backdrop", { opacity: 0 }, { opacity: 1, duration: 0.45 });
+        if (document.querySelector(".modal__backdrop")) {
+          gsap.fromTo(".modal__backdrop", { opacity: 0 }, { opacity: 1, duration: 0.45 });
+        }
         gsap.fromTo(scroll.children,
           { y: 26, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.05, delay: 0.22, clearProps: "all" });
@@ -632,22 +1007,39 @@
     };
 
     const close = () => {
-      const done = () => { modal.hidden = true; lenis?.start(); lastFocus?.focus(); };
+      let finished = false;
+      const done = () => {
+        if (finished) return;
+        finished = true;
+        modal.hidden = true;
+        unlockScroll();
+        if (lenis) lenis.start();
+        if (lastFocus && typeof lastFocus.focus === "function") {
+          lastFocus.focus({ preventScroll: true });
+        }
+      };
       if (REDUCED) return done();
       gsap.to(panel, { xPercent: 100, duration: 0.5, ease: "power3.inOut" });
-      gsap.to(".modal__backdrop", { opacity: 0, duration: 0.45, onComplete: done });
+      const backdrop = document.querySelector(".modal__backdrop");
+      if (backdrop) gsap.to(backdrop, { opacity: 0, duration: 0.45, onComplete: done });
+      /* Safety net: if the backdrop is absent, or iOS suspends rAF because the
+         app was backgrounded mid-close, onComplete never fires and the body
+         stays scroll-locked — the page would appear frozen. */
+      setTimeout(done, 700);
     };
 
     rows.forEach((row) => row.addEventListener("click", () => open(row.dataset.case)));
     modal.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", close));
     // the fallback CTA is an in-page anchor — lenis is stopped while the
     // drawer is open, so close it first and scroll once it has cleared
-    link.addEventListener("click", (e) => {
-      if (link.getAttribute("href") !== "#contact") return;   // real external link
-      e.preventDefault();
-      close();
-      setTimeout(() => scrollToTarget("#contact"), REDUCED ? 0 : 520);
-    });
+    if (link) {
+      link.addEventListener("click", (e) => {
+        if (link.getAttribute("href") !== "#contact") return;   // real external link
+        e.preventDefault();
+        close();
+        setTimeout(() => scrollToTarget("#contact"), REDUCED ? 0 : 520);
+      });
+    }
     document.addEventListener("keydown", (e) => {
       if (modal.hidden) return;
       if (e.key === "Escape") return close();
@@ -655,24 +1047,90 @@
       if (e.key === "ArrowLeft") { e.preventDefault(); shotsGo(shots.i - 1); }
       if (e.key === "ArrowRight") { e.preventDefault(); shotsGo(shots.i + 1); }
     });
-  })();
+  });
 
   /* ─────────────── FOOTER — CLOCK, GRAIN, TOP ─────────────── */
-  (() => {
+  safe("footer", () => {
     const clock = document.getElementById("istClock");
-    const tick = () => {
-      clock.textContent = new Date().toLocaleTimeString("en-IN", {
-        timeZone: "Asia/Kolkata", hour12: false,
-      }) + " IST";
-    };
-    tick(); setInterval(tick, 1000);
 
-    document.getElementById("backToTop").addEventListener("click", () => scrollToTarget("#hero"));
+    /* Older iOS Safari ships a partial Intl build: passing a timeZone it cannot
+       resolve throws a RangeError. That throw used to kill this whole block, so
+       Back-to-Top and the wordmark animation died with the clock. Manual
+       UTC+5:30 fallback keeps IST correct without Intl. */
+    const istManual = () => {
+      const now = new Date();
+      const ist = new Date(now.getTime() + (now.getTimezoneOffset() + 330) * 60000);
+      const pad = (n) => String(n).padStart(2, "0");
+      return pad(ist.getHours()) + ":" + pad(ist.getMinutes()) + ":" + pad(ist.getSeconds());
+    };
+
+    let useIntl = true;
+    const tick = () => {
+      if (!clock) return;
+      let time;
+      if (useIntl) {
+        try {
+          time = new Date().toLocaleTimeString("en-IN", {
+            timeZone: "Asia/Kolkata", hour12: false,
+          });
+        } catch (e) { useIntl = false; }
+      }
+      if (!useIntl || !time) time = istManual();
+      clock.textContent = time + " IST";
+    };
+
+    if (clock) { tick(); setInterval(tick, 1000); }
+
+    const top = document.getElementById("backToTop");
+    if (top) top.addEventListener("click", () => scrollToTarget("#hero"));
 
     // wordmark ripple on enter (clipped by the container — can never overlap links)
     enterStagger(document.getElementById("wordmark"), "span", { yPercent: 100, y: 0 });
-  })();
+  });
 
-  /* ─────────────── FINAL REFRESH ─────────────── */
-  window.addEventListener("load", () => ScrollTrigger.refresh());
+  /* ─────────────── FINAL REFRESH ───────────────
+     ScrollTrigger measures positions once; on iOS those measurements are wrong
+     until images have decoded and the address bar has settled. `resize` was
+     removed from autoRefreshEvents above, so refresh is driven explicitly here
+     — debounced, and only on events that reflect a real layout change. */
+  safe("refresh", () => {
+    if (!HAS_ST) return;
+
+    let t;
+    const refresh = () => { clearTimeout(t); t = setTimeout(() => ScrollTrigger.refresh(), 180); };
+
+    window.addEventListener("load", refresh);
+    window.addEventListener("orientationchange", () => setTimeout(refresh, 320));
+
+    // late-decoding images shift everything below them
+    document.querySelectorAll("img").forEach((img) => {
+      if (!img.complete) img.addEventListener("load", refresh, { once: true });
+    });
+
+    // one settled refresh after the page has had time to finish painting
+    setTimeout(refresh, 1500);
+
+    /* Width-only viewport changes. On iOS the height changes constantly as the
+       toolbar collapses — refreshing on that causes the mid-scroll jumps
+       ignoreMobileResize exists to prevent, so height is deliberately ignored. */
+    let lastW = window.innerWidth;
+    window.addEventListener("resize", () => {
+      if (Math.abs(window.innerWidth - lastW) < 40) return;
+      lastW = window.innerWidth;
+      refresh();
+    }, { passive: true });
+  });
+
+  /* ─────────────── LAST-RESORT ERROR TRAP ───────────────
+     If something still throws on a device we cannot test, make sure the page is
+     readable rather than a set of invisible sections. */
+  window.addEventListener("error", () => {
+    document.body.classList.remove("split-pending");
+    document.querySelectorAll(".reveal-line").forEach((el) => {
+      if (parseFloat(getComputedStyle(el).opacity) < 0.05) {
+        el.style.opacity = 1;
+        el.style.transform = "none";
+      }
+    });
+  });
 })();
